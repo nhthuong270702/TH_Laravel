@@ -44,7 +44,11 @@
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tài Khoản
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <div class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink"
+                                    style="padding: 7px">
+                                    Xin Chào
+                                    <h6><b>{{ Auth::user()->name }}</b></h6>
+                                    <hr>
                                     <a class="dropdown-item" href="/admin">ADMIN</a>
                                     <a class="dropdown-item" href="/dangxuat">Đăng Xuất</a>
                                     <a class="dropdown-item" href="#">Cập Nhật TK</a>

@@ -1,14 +1,14 @@
 @extends('admin.masterlayout.masteradmin')
 
-@section('title', 'Quản lí sản phẩm đã xóa')
+@section('title', 'Quản lí người dùng đã xóa')
 
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 30px; text-align: center">Quản Lí Sản Phẩm Đã Xóa</h2>
+            <h2 style="margin-top: 30px; text-align: center">Quản Lí Người Dùng Đã Xóa</h2>
             <div class="row mb-3">
             </div>
-            @if ($sanphams_trash->isEmpty())
+            @if ($users_trash->isEmpty())
                 <div class="col-12 text-center">
                     @if (session('thongbao'))
                         <div class="alert alert-success text-center" role="alert">
@@ -16,7 +16,7 @@
                         </div>
                     @endif
                     {{ 'Không có gì trong thùng rác!' }}<br><br><br>
-                    <a href="/admin/sanpham">
+                    <a href="/admin/user">
                         << Trở lại</a>
                 </div>
             @else
@@ -27,10 +27,10 @@
                         </div>
                     @endif
                     <div class="add" style="display: flex; justify-content: center;">
-                        <a class="btn btn-warning" href="/admin/sanpham" style="margin-right: 10px">
+                        <a class="btn btn-warning" href="/admin/user" style="margin-right: 10px">
                             << Trở lại</a>
                                 <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
-                                <a class="btn btn-primary" href="{{ route('sanpham.restore') }}"
+                                <a class="btn btn-primary" href="{{ route('user.restore') }}"
                                     style="margin-left: 10px">Khôi Phục Tất
                                     Cả</a>
                     </div>
@@ -39,15 +39,13 @@
                     <table class="table table-striped table-bordered text-center"
                         style="background-color: white; text-align: justify">
                         <thead>
-                            <th><input type="checkbox" id="check_all"></th>
-                            <th>STT</th>
-                            <th>Tên SP</th>
-                            <th>Mô Tả</th>
-                            <th>Giá Bán</th>
-                            <th>Số Lượng</th>
-                            <th>Ngày Đăng</th>
-                            <th>Ảnh</th>
-                            <th colspan="3">Hành Động</th>
+                            <tr class="bg-info">
+                                <th><input type="checkbox" id="check_all"></th>
+                                <th scope="col">STT</th>
+                                <th scope="col">Tên</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                                <th colspan="3" scope="col">Hoạt Động</th>
                             </tr>
                         </thead>
 
@@ -55,23 +53,24 @@
                             @php
                                 $i = 1;
                             @endphp
-                            @foreach ($sanphams_trash as $sanpham)
-                                <tr id="tr_{{ $sanpham->id }}">
-                                    <td><input type="checkbox" class="checkbox" data-id="{{ $sanpham->id }}">
+                            @foreach ($users_trash as $user)
+                                <tr id="tr_{{ $user->id }}">
+                                    <td><input type="checkbox" class="checkbox" data-id="{{ $user->id }}">
+                                    </td>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $sanpham->ten }}</td>
-                                    <td>{!! html_entity_decode($sanpham->mota) !!}</td>
-                                    <td>{{ $sanpham->gia }}</td>
-                                    <td>{{ $sanpham->soluongban }}</td>
-                                    <td>{{ $sanpham->ngaydang }}</td>
-                                    <td><img src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
-                                            style="width:90px; height: 80px;" alt=""></td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    @if ($user->role == 1)
+                                        <td>Người quản trị</td>
+                                    @elseif($user->role == 0)
+                                        <td>Người dùng</td>
+                                    @endif
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('sanpham.unTrash', $sanpham->id) }}"><i
+                                        <a class="btn btn-success" href="{{ route('user.unTrash', $user->id) }}"><i
                                                 class="fas fa-trash-restore"></i></a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('sanpham.forceDelete', $sanpham->id) }}" method="post">
+                                        <form action="{{ route('user.forceDelete', $user->id) }}" method="post">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
                                             <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm"
@@ -135,7 +134,7 @@
                     if (confirm("Bạn có muốn xóa các hàng đã chọn không?")) {
                         var strIds = idsArr.join(",");
                         $.ajax({
-                            url: "{{ route('sanpham.forceDeleteAll') }}",
+                            url: "{{ route('user.forceDeleteAll') }}",
                             type: 'GET',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

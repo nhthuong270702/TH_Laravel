@@ -38,48 +38,54 @@
                                     <div class="col-6">
                                         <div class="input-group col-lg-6 mb-4">
                                             <input style="border-radius: 10px;" type="text" name="ten"
-                                                value="{{ $sanpham->ten }}" placeholder="Tên Sản Phẩm"
-                                                class="form-control bg-white border-left-0 border-md">
-                                        </div>
-                                        <div class="input-group col-lg-12 mb-4">
-                                            <input style="border-radius: 10px;" type="text" name="mota"
-                                                value="{{ $sanpham->mota }}" placeholder="Mô Tả"
+                                                value="{{ $sanpham->ten }}"
                                                 class="form-control bg-white border-left-0 border-md">
                                         </div>
                                         <div class="input-group col-lg-6 mb-4">
                                             <input style="border-radius: 10px;" type="text" name="gia"
-                                                value="{{ $sanpham->gia }}" placeholder="Giá Bán"
-                                                class="form-control bg-white border-left-0 border-md">
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="input-group col-lg-12 mb-4">
-                                            <input style="border-radius: 10px;" type="number" name="soluongban"
-                                                value="{{ $sanpham->soluongban }}" placeholder="Số Lượng Bán"
-                                                class="form-control bg-white border-left-0 border-md">
-                                        </div>
-                                        <div class="input-group col-lg-6 mb-4">
-                                            <input style="border-radius: 10px;" type="date" name="ngaydang"
-                                                value="{{ $sanpham->ngaydang }}" placeholder="Ngày Đăng"
-                                                class="form-control bg-white border-left-0 border-md">
-                                        </div>
-                                        <div class="input-group col-lg-6 mb-4">
-                                            <input style="border-radius: 10px;" type="file" name="anh"
+                                                value="{{ $sanpham->gia }}"
                                                 class="form-control bg-white border-left-0 border-md">
                                         </div>
                                         <div class="input-group col-lg-12 mb-4">
-                                            <select name="id_danh_muc" class="form-control browser-default custom-select"
-                                                aria-valuetext="{{ $sanpham->id_danh_muc }}">
+                                            <select name="id_danh_muc" class="form-control browser-default custom-select">
+                                                <option value="{{ $sanpham->danhmuc->id }}" selected>
+                                                    {{ $sanpham->danhmuc->ten }}</option>
                                                 @foreach ($danhmucs as $danhmuc)
                                                     <option value="{{ $danhmuc->id }}">{{ $danhmuc->ten }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-6">
+                                        <div class="input-group col-lg-12 mb-4">
+                                            <input style="border-radius: 10px;" type="number" name="soluongban"
+                                                value="{{ $sanpham->soluongban }}"
+                                                class="form-control bg-white border-left-0 border-md">
+                                        </div>
+                                        <div class="input-group col-lg-6 mb-4">
+                                            <input style="border-radius: 10px;" type="date" name="ngaydang"
+                                                value="{{ $sanpham->ngaydang }}"
+                                                class="form-control bg-white border-left-0 border-md">
+                                        </div>
+                                        <div class="input-group col-lg-6 mb-4">
+                                            <input style="border-radius: 10px;" type="file" name="anh"
+                                                class="form-control bg-white border-left-0 border-md">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <button class="btn btn-primary" style="width: 150px">Xong</button>
+                                        <div class="form-group">
+                                            <textarea name="mota" id="editor">
+                                                                                                    {{ $sanpham->mota }}
+                                                                                                </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-4" style="display: flex; justify-content: center;">
+                                        <a class="btn btn-warning" href="/admin/sanpham">
+                                            << Trở Lại</a>
+                                                <button class="btn btn-primary"
+                                                    style="width: 150px; margin-left: 10px">Xong</button>
                                     </div>
                                 </div>
                             </form>

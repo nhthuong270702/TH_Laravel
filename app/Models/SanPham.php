@@ -18,6 +18,6 @@ class SanPham extends Model
 
     public function danhmuc()
     {
-        return $this->belongsTo(DanhMuc::class, 'id_danh_muc');
+        return $this->belongsTo(DanhMuc::class, 'id_danh_muc', 'id');
     }
 }

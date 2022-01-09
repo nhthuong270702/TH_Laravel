@@ -30,7 +30,7 @@ class ThemSanPhamRequest extends FormRequest
             'soluongban' => 'required',
             'ngaydang' => 'required',
             'id_danh_muc' => 'required',
-            'anh' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'anh' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
 

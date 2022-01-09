@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CapNhatBlogRequest;
 use App\Http\Requests\ThemBlogRequest;
 use App\Models\Blog;
 
@@ -42,8 +43,8 @@ class BlogController extends Controller
 
     public function show($id)
     {
-        $data['Blog'] = Blog::find($id);
-        $data['sanphams'] = $data['Blog']->sanphams;
+        $data['blog'] = Blog::find($id);
+        $data['blogs'] = $data['Blog']->blogs;
         return view('admin.Blog.show')->with($data);
     }
 
@@ -53,7 +54,7 @@ class BlogController extends Controller
         return view('admin.blog.update', compact('blog'));
     }
 
-    public function update(ThemBlogRequest $request, $id)
+    public function update(CapNhatBlogRequest $request, $id)
     {
         $blog = Blog::find($id);
         $data = $request->validated();
@@ -76,5 +77,70 @@ class BlogController extends Controller
     {
         Blog::find($id)->delete();
         return redirect()->route('blog.index')->with('thongbao', 'Xóa thành công');
+    }
+    public function destroyAll(Request $request)
+    {
+        $ids = $request->ids;
+        Blog::whereIn('id', explode(",", $ids))->delete();
+        return redirect()->back()->with('tb_xoa', 'Đã chuyển vào thùng rác');
+    }
+    public function trash()
+    {
+        $blogs_trash = Blog::onlyTrashed()->get();
+        return view('admin.blog.trash', compact('blogs_trash'));
+    }
+    public function unTrash($id)
+    {
+        $blog = Blog::onlyTrashed()->find($id);
+        $blog->restore();
+        return redirect()->route('blog.trash')->with('thongbao', 'Khôi phục thành công');
+    }
+    public function forceDelete($id)
+    {
+        $blog = Blog::onlyTrashed()->find($id);
+        $blog->forceDelete();
+        return redirect()->route('blog.trash')->with('thongbao', 'Xóa thành công');
+    }
+    public function forceDeleteAll()
+    {
+        $blog = Blog::onlyTrashed();
+        $blog->forceDelete();
+        return redirect()->route('blog.trash')->with('thongbao', 'Xóa thành công');
+    }
+    public function restore()
+    {
+        $blog = Blog::onlyTrashed();
+        $blog->restore();
+        return redirect()->route('blog.trash')->with('thongbao', 'Khôi Phục Thành Công');
+    }
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = '';
+            $users = Blog::where('tieude', 'like', '%' . $request->search . '%')->get();
+            $i = 1;
+            foreach ($users as $key => $al) {
+                $output .= '<tr>
+                            <td><input type="checkbox" name="ids" class="checkBoxClass" value=""></td>
+                            <td>' . $i++ . '</td>
+                            <td>' . $al->tieude . '</td>
+                            <td>' . $al->noidung . '</td>
+                            <td>' . $al->ngaydang . '</td>
+                            <td>' . $al->sobinhluan . '</td>
+                            <td>' . $al->anh . '</td>
+                            <td><a href="/admin/blog/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
+                            <td><a href="/admin/blog/edit' . $al->id . '"><button class="btn btn-warning"><i
+                                            class="far fa-edit"></i></button></a></td>
+                            <td>
+                                    <form action="/admin/blog/delete/' . $al->id . '" method="post">
+                                    ' . csrf_field() . '
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                    </form>
+                               </td>
+                            </tr>';
+            }
+        }
+        return Response($output);
     }
 }

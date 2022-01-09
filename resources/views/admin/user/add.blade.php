@@ -7,11 +7,7 @@
     <div id="layoutSidenav_content">
         <main style="padding: 25px;background-color: rgb(237, 241, 245);">
             <div style="background-color:rgb(255, 255, 255);" class="container-fluid px-4 ">
-                <h1 style="padding-top: 20px;" class="text-center"><i class="fas fa-tasks"></i> Quản Lí Người Dùng</h1>
-                <h4 class="text-center" style="background-color: blue; color: white; padding: 20px ;border-radius: 20px;">
-                    Thêm Người Dùng</h4>
-                <!--important link source from "https://bootstrapious.com/p/bootstrap-registration-page"-->
-                <!-- Navbar-->
+                <h1 style="padding-top: 20px;" class="text-center"><i class="fas fa-tasks"></i> Thêm Người Dùng</h1>
                 <header class="header">
                     <nav class="navbar navbar-expand-lg navbar-light py-3">
                         <div class="container">
@@ -23,7 +19,7 @@
                 </header>
 
                 <div class="container">
-                    <div class="row py-5 mt-4 align-items-center">
+                    <div class="row py-5 align-items-center">
                         <!-- For Demo Purpose -->
                         <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
                             <img src="https://blackrockbusiness.com/wp-content/uploads/2017/05/quickbooks-enterprise-add-user.png"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CapNhatDanhMucRequest;
 use App\Http\Requests\ThemDanhMucRequest;
 use App\Models\DanhMuc;
 
@@ -53,7 +54,7 @@ class DanhMucController extends Controller
         return view('admin.danhmuc.update', compact('danhmuc'));
     }
 
-    public function update(ThemDanhMucRequest $request, $id)
+    public function update(CapNhatDanhMucRequest $request, $id)
     {
         $danhmuc = DanhMuc::find($id);
         $data = $request->validated();

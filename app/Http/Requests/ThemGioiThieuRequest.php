@@ -29,7 +29,7 @@ class ThemGioiThieuRequest extends FormRequest
             'tieuchi1' => 'required',
             'tieuchi2' => 'required',
             'tieuchi3' => 'required',
-            'anh' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'anh' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
     public function messages()
@@ -40,6 +40,7 @@ class ThemGioiThieuRequest extends FormRequest
             'tieuchi1.required' => "Vui lòng điền vào trường Tiêu Chí 1",
             'tieuchi2.required' => "Vui lòng điền vào trường Tiêu Chí 2",
             'tieuchi3.required' => "Vui lòng điền vào trường Tiêu Chí 3",
+            'anh.required' => "Vui lòng điền vào trường Ảnh",
             'anh.image' => 'File được chọn không phải là ảnh',
             'anh.mimes' => 'Định dạng ảnh phải là: jpeg, png, jpg, gif, svg'
         ];

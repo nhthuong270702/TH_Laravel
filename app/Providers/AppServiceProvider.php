@@ -43,13 +43,18 @@ class AppServiceProvider extends ServiceProvider
         //blog
         $blog3 = DB::table('blogs')->orderBy('id', 'desc')->take(3)->get();
         view()->share('blog3', $blog3);
+        $blog0 = DB::table('blogs')->where('id', 10)->first();
+        view()->share('blog0', $blog0);
+        $blog1 = DB::table('blogs')->where('id', 11)->first();
+        view()->share('blog1', $blog1);
+        $blog2 = DB::table('blogs')->where('id', 12)->first();
+        view()->share('blog2', $blog2);
 
         //sanpham
-        $sanpham3 = DB::table('san_pham')->orderBy('id', 'desc')->take(3)->get();
+        $sanphams = SanPham::with('danhmuc')->take(8)->get();
+        view()->share('sanphams', $sanphams);
+
+        $sanpham3 = DB::table('san_pham')->orderBy('id', 'asc')->take(3)->get();
         view()->share('sanpham3', $sanpham3);
-
-        $sanphams = SanPham::all();
-
-        return view()->share('sanphams', $sanphams);
     }
 }

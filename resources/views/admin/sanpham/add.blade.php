@@ -73,7 +73,8 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <textarea name="mota" id="editor" value="{{ old('mota') }}"></textarea>
+                                            <textarea name="mota" id="editor"
+                                                value="{{ old('mota') }}">{{ old('mota') }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4" style="display: flex; justify-content: center;">

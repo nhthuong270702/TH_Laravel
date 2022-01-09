@@ -93,9 +93,7 @@ body {
     margin-right: auto;
     margin-bottom: -20px;
 }
-#catelogy {
-    margin-top: 20px;
-}
+
 .catelogy .btn-popu {
     float: right;
     width: 160px;
@@ -117,7 +115,7 @@ body {
 /* location */
 .img-location {
     border-radius: 10px;
-    height: 280px;
+    height: 320px;
     margin-top: 20px;
     padding: 30px;
 }
@@ -212,6 +210,15 @@ hr {
 }
 .around p {
     padding: 0 40px;
+}
+.text-plan {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 23px;
+    -webkit-line-clamp: 3;
+    height: 310px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 /* blog */
 .blog {

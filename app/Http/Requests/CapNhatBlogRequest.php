@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ThemDanhMucRequest extends FormRequest
+class CapNhatBlogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,17 @@ class ThemDanhMucRequest extends FormRequest
     public function rules()
     {
         return [
-            'ten' => 'required|string',
-            'anh' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'user_id' => '',
+            'tieude' => '',
+            'noidung' => '',
+            'anh' => 'image|mimes:jpeg,png,jpg,gif,svg',
+            'ngaydang' => '',
+            'sobinhluan' => '',
         ];
     }
     public function messages()
     {
         return [
-            'ten.required' => "Vui lòng điền vào trường Tên Danh Mục",
-            'anh.required' => "Vui lòng điền vào trường Ảnh",
             'anh.image' => 'File được chọn không phải là ảnh',
             'anh.mimes' => 'Định dạng ảnh phải là: jpeg, png, jpg, gif, svg'
         ];

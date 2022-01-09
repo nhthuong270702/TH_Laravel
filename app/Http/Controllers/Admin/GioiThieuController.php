@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CapNhatGioiThieuRequest;
 use App\Http\Requests\ThemGioiThieuRequest;
 use App\Models\GioiThieu;
 
@@ -52,7 +53,7 @@ class GioiThieuController extends Controller
         return view('admin.gioithieu.update', compact('about'));
     }
 
-    public function update(ThemGioiThieuRequest $request, $id)
+    public function update(CapNhatGioiThieuRequest $request, $id)
     {
         $about = GioiThieu::find($id);
         $data = $request->validated();

@@ -25,11 +25,11 @@ class ThemBlogRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'tieude' => 'required|string',
-            'noidung' => 'required|string',
-            'anh' => 'image|mimes:jpeg,png,jpg,gif,svg',
-            'ngaydang' => 'required|string',
-            'sobinhluan' => 'string',
+            'tieude' => 'required',
+            'noidung' => 'required',
+            'anh' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'ngaydang' => 'required',
+            'sobinhluan' => 'required',
         ];
     }
     public function attributes()

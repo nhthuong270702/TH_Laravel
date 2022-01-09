@@ -165,7 +165,7 @@
                                     <img class="card-img-top img-location"
                                         src="{{ asset('images/sanpham/' . $sanpham->anh) }}" alt="Card image cap">
                                     <div class="card-body">
-                                        <p class="card-text"><a href=""><b>
+                                        <p style="height: 80px" class="card-text"><a href=""><b>
                                                     {{ $sanpham->ten }}
                                                 </b></a>
                                         </p>
@@ -174,7 +174,7 @@
                                         </b> &#8363 <span
                                             style="float: right; background-color: #ff4367; color: white; padding: 5px 10px">Đã
                                             Bán:
-                                            {{ $sanpham->soluongban }}</span>
+                                            <b>{{ $sanpham->soluongban }}</b></span>
                                     </div>
                                 </div>
                             </div>
@@ -232,26 +232,31 @@
                 </div>
                 <div class="row mt-4">
                     @foreach ($sanphams as $sanpham)
-                        <div class="col-md-3" data-aos="flip-left">
-                            <div class="card" style="width: 100%;">
-                                <div class="card-body text">
-                                    <span class="title">{{ $sanpham->danhmuc->ten }}</span> <span
-                                        style="float: right;"><i class="far fa-heart"></i></span>
-                                    <hr>
-                                    <a href="">
-                                        <p class="card-text" style="color: #453be4;">{{ $sanpham->ten }}</p>
-                                    </a>
-                                    <small><i class="fas fa-cart-arrow-down"></i> Số lượng đã bán:
-                                        {{ $sanpham->soluongban }}</small>
-                                    <br>
-                                    <br>
-                                    <span
-                                        style="color: #ff4367; font-size: 20px; font-weight: bolder;">{{ $sanpham->gia }}&#8363
-                                    </span>
-                                    <small style="float: right; margin-top: 7px;"><i>{{ $sanpham->ngaydang }}</i></small>
+                        @if (isset($sanpham->deleted_at))
+                        @else
+                            <div class="col-md-3" data-aos="flip-left">
+                                <div class="card" style="width: 100%; margin-top: 10px">
+                                    <div class="card-body text">
+                                        <span class="title">{{ $sanpham->danhmuc->ten }}</span> <span
+                                            style="float: right;"><i class="far fa-heart"></i></span>
+                                        <hr>
+                                        <a href="">
+                                            <p class="card-text" style="color: #453be4; height: 80px;">
+                                                {{ $sanpham->ten }}</p>
+                                        </a>
+                                        <small><i class="fas fa-cart-arrow-down"></i> Số lượng đã bán:
+                                            {{ $sanpham->soluongban }}</small>
+                                        <br>
+                                        <br>
+                                        <span
+                                            style="color: #ff4367; font-size: 20px; font-weight: bolder;">{{ $sanpham->gia }}&#8363
+                                        </span>
+                                        <small
+                                            style="float: right; margin-top: 7px;"><i>{{ $sanpham->ngaydang }}</i></small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -396,18 +401,15 @@
                 <div class="row">
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: -5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                        -moz-box-shadow: -5px -5px -5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-box-shadow: -5px -5px -5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -moz-box-shadow: -5px -5px -5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-box-shadow: -5px -5px -5px #666;">
                         <i class="fas fa-award fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
-                        <p class="title"><b>Beginners</b></p><br>
-                        <p>
-                            Since we've partnered with ELSA, the feedback has been very positive. Teachers have
-                            reported
-                            improved pronunciation and they are loving how easy it is to follow and track the
-                            students'
-                            progress.
-                        </p>
-                        <h3>$0.00</h3>
+                        <b class="title">Beginners</b>
+                        @if (isset($blog0->deleted_at))
+                        @else
+                            <span class="text-plan">{!! html_entity_decode($blog0->noidung) !!}</span>
+                            <h3>{{ $blog0->ngaydang }}</h3>
+                        @endif
                         <button type="button" class="btn btn-danger"
                             style="margin-left: auto; margin-right: auto; display: block; background-color: #ff4367; color: white;">View
                             all
@@ -415,14 +417,12 @@
                     </div>
                     <div class="col-md-4 center text-center" data-aos="flip-right">
                         <i class="fab fa-buffer fa-4x icon" style="margin-top: 80px;"></i> <br>
-                        <p class="title"><b>Standard</b></p> <br>
-                        <p>
-                            Since we've partnered with ELSA, the feedback has been very positive. Teachers have
-                            reported
-                            improved pronunciation and
-                            they are loving how easy it is to follow and track the students' progress.
-                        </p>
-                        <h3>$0.00</h3>
+                        <b class="title">Standard</b>
+                        @if (isset($blog1->deleted_at))
+                        @else
+                            <span class="text-plan">{!! html_entity_decode($blog1->noidung) !!}</span>
+                            <h3>{{ $blog1->ngaydang }}</h3>
+                        @endif
                         <button type="button" class="btn btn-danger"
                             style="margin-left: auto; margin-right: auto; display: block; background-color: white; color: #ff4367;">View
                             all
@@ -430,18 +430,15 @@
                     </div>
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                        -moz-box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-box-shadow: 5px 5px 5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -moz-box-shadow: 5px 5px 5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-box-shadow: 5px 5px 5px #666;">
                         <i class="fab fa-asymmetrik fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
-                        <p class="title"><b>Premium</b></p> <br>
-                        <p>
-                            Since we've partnered with ELSA, the feedback has been very positive. Teachers have
-                            reported
-                            improved pronunciation and they are loving how easy it is to follow and track the
-                            students'
-                            progress.
-                        </p>
-                        <h3>$0.00</h3>
+                        <b class="title">Premium</b>
+                        @if (isset($blog2->deleted_at))
+                        @else
+                            <span class="text-plan">{!! html_entity_decode($blog2->noidung) !!}</span>
+                            <h3>{{ $blog2->ngaydang }}</h3>
+                        @endif
                         <button type="button" class="btn btn-danger"
                             style="margin-left: auto; margin-right: auto; display: block; background-color: #ff4367; color: white;">View
                             all
@@ -462,29 +459,33 @@
                 </div>
                 <div class="row mt-4">
                     @foreach ($blog3 as $blog)
-                        <div class="col-md-4" data-aos="flip-left">
-                            <div class="card card-location" style="width: 100%;">
-                                <img class="card-img-top img-blog" src="{{ asset('images/blogs/' . $blog->anh) }}"
-                                    alt="Card image cap">
-                                <div class="card-body">
-                                    <a href="">
-                                        <p class="card-text" style="color: #453be4; font-weight: bold;">
-                                            {{ $blog->tieude }}
-                                        </p>
-                                    </a>
-                                    <ul class="blog">
-                                        <li>
-                                            <i class="far fa-clock"></i>
-                                            <small>{{ $blog->ngaydang }}</small>
-                                        </li>
-                                        <li>
-                                            <i class="far fa-comment"></i>
-                                            <small>{{ $blog->sobinhluan }} comments</small>
-                                        </li>
-                                    </ul>
+                        @if (isset($blog->deleted_at))
+                        @else
+                            <div class="col-md-4" data-aos="flip-left">
+                                <div class="card card-location" style="width: 100%;">
+                                    <img class="card-img-top img-blog" src="{{ asset('images/blogs/' . $blog->anh) }}"
+                                        alt="Card image cap">
+                                    <div class="card-body">
+                                        <a href="">
+                                            <p class="card-text"
+                                                style="color: #453be4; font-weight: bold;height: 60px;">
+                                                {{ $blog->tieude }}
+                                            </p>
+                                        </a>
+                                        <ul class="blog">
+                                            <li>
+                                                <i class="far fa-clock"></i>
+                                                <small>{{ $blog->ngaydang }}</small>
+                                            </li>
+                                            <li>
+                                                <i class="far fa-comment"></i>
+                                                <small>{{ $blog->sobinhluan }} comments</small>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     @endforeach
                 </div>
                 <div class="row">

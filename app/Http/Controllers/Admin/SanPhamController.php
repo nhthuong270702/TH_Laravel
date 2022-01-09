@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\CapNhatSanPhamRequest;
 use App\Http\Requests\ThemSanPhamRequest;
 use App\Models\DanhMuc;
 use App\Models\SanPham;
@@ -64,7 +63,7 @@ class SanPhamController extends Controller
         return view('admin.sanpham.update')->with($data);
     }
 
-    public function update(ThemSanPhamRequest $request, $id)
+    public function update(CapNhatSanPhamRequest $request, $id)
     {
         $sanpham = SanPham::find($id);
         $data = $request->validated();
@@ -111,6 +110,12 @@ class SanPhamController extends Controller
         $sanpham->forceDelete();
         return redirect()->route('sanpham.trash')->with('thongbao', 'Xóa thành công');
     }
+    public function forceDeleteAll()
+    {
+        $sanpham = SanPham::onlyTrashed();
+        $sanpham->forceDelete();
+        return redirect()->route('sanpham.trash')->with('thongbao', 'Xóa thành công');
+    }
     public function restore()
     {
         $sanpham = SanPham::onlyTrashed();
@@ -123,16 +128,19 @@ class SanPhamController extends Controller
             $output = '';
             $users = SanPham::where('ten', 'like', '%' . $request->search . '%')
                 ->orwhere('gia', 'like', '%' . $request->search . '%')->get();
-            foreach ($users as $key => $al) {
-                $i = 1;
+            $i = 1;
+            foreach ($users as $al) {
                 $output .= '<tr>
                             <td><input type="checkbox" name="ids" class="checkBoxClass" value=""></td>
-                            <td>' . $al->id . '</td>
+                            <td>' . $i++ . '</td>
                             <td>' . $al->ten . '</td>
-                            <td>' . $al->mota . '</td>
+                            <td style="text-align: justify">' . $al->mota . '</td>
                             <td>' . $al->gia . '</td>
                             <td>' . $al->soluongban . '</td>
                             <td>' . $al->ngaydang . '</td>
+                            <td style="text-align: center"><img src="{{ asset(' . 'images/sanpham/' . ' . $al->anh) }}"
+                                        style="width:90px; height: 80px;" alt=""></td>
+                                <td>
                             <td><a href="/admin/sanpham/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
                             <td><a href="/admin/sanpham/edit' . $al->id . '"><button class="btn btn-warning"><i
                                             class="far fa-edit"></i></button></a></td>

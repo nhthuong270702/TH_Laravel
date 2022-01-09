@@ -4,10 +4,25 @@
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
             <h2 style="margin-top: 20px; text-align: center">Quản Lí Blog</h2>
-            <div class="row mb-3">
-                <div class="add">
-                    <a style="float: left; padding-left: 10px;" href="{{ route('blog.create') }}"><button
-                            class="btn btn-primary">Thêm Blog</button></a>
+            <div class="add">
+                <div class="row">
+                    <div class="col-9">
+                        <a href="{{ route('blog.create') }}"><button class="btn btn-success">Thêm Blog</button></a>
+                        <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
+                        <button class="btn btn-primary"><a style="color: white;text-decoration: none;"
+                                href="{{ route('blog.trash') }}">Thùng
+                                rác</a></button>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <input class="form-control mr-sm-2" type="search" name="search" id="search"
+                                placeholder="Từ khóa tìm kiếm...">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
+                                        class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -21,6 +36,7 @@
                 <table class="table table-striped table-bordered text-center" style="background-color: white">
                     <thead>
                         <tr>
+                            <th><input type="checkbox" id="check_all"></th>
                             <th>STT</th>
                             <th style="width: 160px">Tiêu Đề</th>
                             <th style="width: 500px">Nội Dung</th>
@@ -36,7 +52,8 @@
                             $i = 1;
                         @endphp
                         @foreach ($blogs as $blog)
-                            <tr>
+                            <tr id="tr_{{ $blog->id }}">
+                                <td><input type="checkbox" class="checkbox" data-id="{{ $blog->id }}">
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $blog->tieude }}</td>
                                 <td style="text-align:justify">
@@ -69,29 +86,110 @@
                 <div style="float: right;" class="phantrang">
                     {!! $blogs->links() !!}
                 </div>
-                {{-- xoa 1 --}}
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-                <script type="text/javascript">
-                    $('.show_confirm').click(function(event) {
-                        var form = $(this).closest("form");
-                        var name = $(this).data("name");
-                        event.preventDefault();
-                        swal({
-                                title: `Bạn có muốn xóa người dùng này không?`,
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            })
-                            .then((willDelete) => {
-                                if (willDelete) {
-                                    form.submit();
-                                }
-                            });
-                    });
-                </script>
             </div>
     </div>
     </div>
     </main>
     </div>
+    {{-- xoa 1 --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                    title: `Bạn có muốn xóa người dùng này không?`,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
+    {{-- xoa nhieu --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#check_all').on('click', function(e) {
+                if ($(this).is(':checked', true)) {
+                    $(".checkbox").prop('checked', true);
+                } else {
+                    $(".checkbox").prop('checked', false);
+                }
+            });
+            $('.checkbox').on('click', function() {
+                if ($('.checkbox:checked').length == $('.checkbox').length) {
+                    $('#check_all').prop('checked', true);
+                } else {
+                    $('#check_all').prop('checked', false);
+                }
+            });
+            $('.delete-all').on('click', function(e) {
+                e.preventDefault();
+                var idsArr = [];
+                $(".checkbox:checked").each(function() {
+                    idsArr.push($(this).attr('data-id'));
+                });
+                if (idsArr.length <= 0) {
+                    alert("Vui lòng chọn ít nhất 1 hàng để xóa.");
+                } else {
+                    if (confirm("Bạn có muốn xóa các hàng đã chọn không?")) {
+                        var strIds = idsArr.join(",");
+                        $.ajax({
+                            url: "{{ route('blog.destroyAll') }}",
+                            type: 'GET',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data: 'ids=' + strIds,
+                            success: function(data) {
+                                if (data['status'] == true) {
+                                    $(".checkbox:checked").each(function() {
+                                        $(this).parents("tr_").remove();
+                                    });
+                                    alert(data['message']);
+                                } else {
+                                    location.reload();
+                                }
+                            },
+                            error: function(data) {
+                                alert(data.responseText);
+                            }
+                        });
+                    }
+                }
+            });
+            $('[data-toggle=confirmation]').confirmation({
+                rootSelector: '[data-toggle=confirmation]',
+                onConfirm: function(event, element) {
+                    element.closest('form').submit();
+                }
+            });
+        });
+    </script>
+    <!-- tìm kiếm ajax -->
+    <script type="text/javascript">
+        $('#search').on('keyup', function() {
+            $value = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '/admin/blog/search',
+                data: {
+                    'search': $value
+                },
+                success: function(data) {
+                    $('tbody').html(data);
+                }
+            });
+        })
+        $.ajaxSetup({
+            headers: {
+                'csrftoken': '{{ csrf_token() }}'
+            }
+        });
+    </script>
 @endsection

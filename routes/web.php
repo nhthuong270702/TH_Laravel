@@ -44,10 +44,14 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
         Route::post('/store', 'UserController@store')->name('store');
         Route::get('/edit/{id}', 'UserController@edit')->name('edit');
         Route::put('/edit/{id}', 'UserController@update')->name('update');
+        Route::delete('/delete/{id}', 'UserController@destroy')->name('destroy');
+        Route::get('/xoa-nhieu-nguoi-dung', 'UserController@destroyAll')->name('destroyAll');
         Route::get('/search', 'UserController@search')->name('search');
-        Route::get('/thungrac', 'UserController@recybin')->name('recybin');
-        Route::delete('/xoavinhvien/{id}', 'UserController@xoavinhvien')->name('xoavinhvien');
-        Route::get('/restore/{id}', 'UserController@restore')->name('restore');
+        Route::get('/thung-rac', 'UserController@trash')->name('trash');
+        Route::get('/khoi-phuc/{id}', 'UserController@unTrash')->name('unTrash');
+        Route::delete('/xoa-vinh-vien/{id}', 'UserController@forceDelete')->name('forceDelete');
+        Route::get('/xoa-vinh-vien', 'UserController@forceDeleteAll')->name('forceDeleteAll');
+        Route::get('/khoi-phuc-nguoi-dung', 'UserController@restore')->name('restore');
     });
 
     //sanpham
@@ -64,6 +68,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
         Route::get('/thung-rac', 'SanPhamController@trash')->name('trash');
         Route::get('/khoi-phuc/{id}', 'SanPhamController@unTrash')->name('unTrash');
         Route::delete('/xoa-vinh-vien/{id}', 'SanPhamController@forceDelete')->name('forceDelete');
+        Route::get('/xoa-vinh-vien', 'SanPhamController@forceDeleteAll')->name('forceDeleteAll');
         Route::get('/khoi-phuc-san-pham', 'SanPhamController@restore')->name('restore');
     });
 
@@ -88,7 +93,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
         Route::get('/edit/{id}', 'BlogController@edit')->name('edit');
         Route::put('/edit/{id}', 'BlogController@update')->name('update');
         Route::delete('/delete/{id}', 'BlogController@destroy')->name('destroy');
+        Route::get('/xoa-nhieu-san-pham', 'BlogController@destroyAll')->name('destroyAll');
         Route::get('/search', 'BlogController@search')->name('search');
+        Route::get('/thung-rac', 'BlogController@trash')->name('trash');
+        Route::get('/khoi-phuc/{id}', 'BlogController@unTrash')->name('unTrash');
+        Route::delete('/xoa-vinh-vien/{id}', 'BlogController@forceDelete')->name('forceDelete');
+        Route::get('/xoa-vinh-vien', 'BlogController@forceDeleteAll')->name('forceDeleteAll');
+        Route::get('/khoi-phuc-san-pham', 'BlogController@restore')->name('restore');
     });
 
     //gioithieu

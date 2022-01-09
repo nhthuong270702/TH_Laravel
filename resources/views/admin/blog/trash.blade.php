@@ -1,14 +1,14 @@
 @extends('admin.masterlayout.masteradmin')
 
-@section('title', 'Quản lí sản phẩm đã xóa')
+@section('title', 'Quản lí blog đã xóa')
 
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 30px; text-align: center">Quản Lí Sản Phẩm Đã Xóa</h2>
+            <h2 style="margin-top: 30px; text-align: center">Quản Lí Blog Đã Xóa</h2>
             <div class="row mb-3">
             </div>
-            @if ($sanphams_trash->isEmpty())
+            @if ($blogs_trash->isEmpty())
                 <div class="col-12 text-center">
                     @if (session('thongbao'))
                         <div class="alert alert-success text-center" role="alert">
@@ -16,7 +16,7 @@
                         </div>
                     @endif
                     {{ 'Không có gì trong thùng rác!' }}<br><br><br>
-                    <a href="/admin/sanpham">
+                    <a href="/admin/blog">
                         << Trở lại</a>
                 </div>
             @else
@@ -27,10 +27,10 @@
                         </div>
                     @endif
                     <div class="add" style="display: flex; justify-content: center;">
-                        <a class="btn btn-warning" href="/admin/sanpham" style="margin-right: 10px">
+                        <a class="btn btn-warning" href="/admin/blog" style="margin-right: 10px">
                             << Trở lại</a>
                                 <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
-                                <a class="btn btn-primary" href="{{ route('sanpham.restore') }}"
+                                <a class="btn btn-primary" href="{{ route('blog.restore') }}"
                                     style="margin-left: 10px">Khôi Phục Tất
                                     Cả</a>
                     </div>
@@ -39,15 +39,15 @@
                     <table class="table table-striped table-bordered text-center"
                         style="background-color: white; text-align: justify">
                         <thead>
-                            <th><input type="checkbox" id="check_all"></th>
-                            <th>STT</th>
-                            <th>Tên SP</th>
-                            <th>Mô Tả</th>
-                            <th>Giá Bán</th>
-                            <th>Số Lượng</th>
-                            <th>Ngày Đăng</th>
-                            <th>Ảnh</th>
-                            <th colspan="3">Hành Động</th>
+                            <tr>
+                                <th><input type="checkbox" id="check_all"></th>
+                                <th>STT</th>
+                                <th style="width: 160px">Tiêu Đề</th>
+                                <th style="width: 500px">Nội Dung</th>
+                                <th>Ngày Đăng</th>
+                                <th>Số Bình Luận</th>
+                                <th>Ảnh</th>
+                                <th colspan="3">Hành Động</th>
                             </tr>
                         </thead>
 
@@ -55,23 +55,24 @@
                             @php
                                 $i = 1;
                             @endphp
-                            @foreach ($sanphams_trash as $sanpham)
-                                <tr id="tr_{{ $sanpham->id }}">
-                                    <td><input type="checkbox" class="checkbox" data-id="{{ $sanpham->id }}">
+                            @foreach ($blogs_trash as $blog)
+                                <tr id="tr_{{ $blog->id }}">
+                                    <td><input type="checkbox" class="checkbox" data-id="{{ $blog->id }}">
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $sanpham->ten }}</td>
-                                    <td>{!! html_entity_decode($sanpham->mota) !!}</td>
-                                    <td>{{ $sanpham->gia }}</td>
-                                    <td>{{ $sanpham->soluongban }}</td>
-                                    <td>{{ $sanpham->ngaydang }}</td>
-                                    <td><img src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
+                                    <td>{{ $blog->tieude }}</td>
+                                    <td style="text-align:justify">
+                                        {!! html_entity_decode($blog->noidung) !!}
+                                    </td>
+                                    <td style="text-align: center">{{ $blog->ngaydang }}</td>
+                                    <td style="text-align: center">{{ $blog->sobinhluan }}</td>
+                                    <td><img src="{{ asset('images/blogs/' . $blog->anh) }}"
                                             style="width:90px; height: 80px;" alt=""></td>
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('sanpham.unTrash', $sanpham->id) }}"><i
+                                        <a class="btn btn-success" href="{{ route('blog.unTrash', $blog->id) }}"><i
                                                 class="fas fa-trash-restore"></i></a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('sanpham.forceDelete', $sanpham->id) }}" method="post">
+                                        <form action="{{ route('blog.forceDelete', $blog->id) }}" method="post">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
                                             <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm"
@@ -135,7 +136,7 @@
                     if (confirm("Bạn có muốn xóa các hàng đã chọn không?")) {
                         var strIds = idsArr.join(",");
                         $.ajax({
-                            url: "{{ route('sanpham.forceDeleteAll') }}",
+                            url: "{{ route('blog.forceDeleteAll') }}",
                             type: 'GET',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
