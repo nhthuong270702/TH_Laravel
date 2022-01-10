@@ -27,10 +27,10 @@
                         </div>
                     @endif
                     <div class="add" style="display: flex; justify-content: center;">
-                        <a class="btn btn-warning" href="/admin/sanpham" style="margin-right: 10px">
+                        <a class="btn btn-outline-light text-dark" href="/admin/sanpham" style="margin-right: 10px">
                             << Trở lại</a>
-                                <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
-                                <a class="btn btn-primary" href="{{ route('sanpham.restore') }}"
+                                <button class="btn btn-outline-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
+                                <a class="btn btn-outline-primary" href="{{ route('sanpham.restore') }}"
                                     style="margin-left: 10px">Khôi Phục Tất
                                     Cả</a>
                     </div>
@@ -94,7 +94,7 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Bạn có muốn xóa người dùng này không?`,
+                    title: `Bạn có muốn xóa vĩnh viễn sản phẩm này không?`,
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

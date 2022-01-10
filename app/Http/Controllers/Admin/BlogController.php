@@ -13,7 +13,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        $blogs = Blog::paginate(10);
+        $blogs = Blog::sortable()->paginate(10);
         return view('admin.Blog.list', compact('blogs'));
     }
 
@@ -44,8 +44,7 @@ class BlogController extends Controller
     public function show($id)
     {
         $data['blog'] = Blog::find($id);
-        $data['blogs'] = $data['Blog']->blogs;
-        return view('admin.Blog.show')->with($data);
+        return view('admin.blog.show')->with($data);
     }
 
     public function edit($id)
@@ -117,19 +116,20 @@ class BlogController extends Controller
     {
         if ($request->ajax()) {
             $output = '';
-            $users = Blog::where('tieude', 'like', '%' . $request->search . '%')->get();
+            $blogs = Blog::where('tieude', 'like', '%' . $request->search . '%')->get();
             $i = 1;
-            foreach ($users as $key => $al) {
-                $output .= '<tr>
-                            <td><input type="checkbox" name="ids" class="checkBoxClass" value=""></td>
-                            <td>' . $i++ . '</td>
+            foreach ($blogs as $al) {
+                $output .= '<tr id="tr_{{ $blog->id }}">
+                                <td><input type="checkbox" class="checkbox" data-id="{{ $al->id }}">
+                            <td style="text-align: center">' . $i++ . '</td>
                             <td>' . $al->tieude . '</td>
                             <td>' . $al->noidung . '</td>
-                            <td>' . $al->ngaydang . '</td>
-                            <td>' . $al->sobinhluan . '</td>
-                            <td>' . $al->anh . '</td>
+                            <td style="text-align: center">' . $al->ngaydang . '</td>
+                            <td style="text-align: center">' . $al->sobinhluan . '</td>
+                           <td style="text-align: center"><img src="../images/blogs/' .  $al->anh  . '"
+                                        style="width:150px; height: 120px;" alt=""></td>
                             <td><a href="/admin/blog/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
-                            <td><a href="/admin/blog/edit' . $al->id . '"><button class="btn btn-warning"><i
+                            <td><a href="/admin/blog/edit/' . $al->id . '"><button class="btn btn-warning"><i
                                             class="far fa-edit"></i></button></a></td>
                             <td>
                                     <form action="/admin/blog/delete/' . $al->id . '" method="post">

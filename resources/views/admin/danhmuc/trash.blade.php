@@ -1,14 +1,14 @@
 @extends('admin.masterlayout.masteradmin')
 
-@section('title', 'Quản lí các blog đã xóa')
+@section('title', 'Quản lí danh mục đã xóa')
 
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 30px; text-align: center">Quản Lí Blog Đã Xóa</h2>
+            <h2 style="margin-top: 30px; text-align: center">Quản Lí Danh Mục Đã Xóa</h2>
             <div class="row mb-3">
             </div>
-            @if ($blogs_trash->isEmpty())
+            @if ($danhmucs_trash->isEmpty())
                 <div class="col-12 text-center">
                     @if (session('thongbao'))
                         <div class="alert alert-success text-center" role="alert">
@@ -16,7 +16,7 @@
                         </div>
                     @endif
                     {{ 'Không có gì trong thùng rác!' }}<br><br><br>
-                    <a href="/admin/blog">
+                    <a href="/admin/danhmuc">
                         << Trở lại</a>
                 </div>
             @else
@@ -27,10 +27,10 @@
                         </div>
                     @endif
                     <div class="add" style="display: flex; justify-content: center;">
-                        <a class="btn btn-outline-light text-dark" href="/admin/blog" style="margin-right: 10px">
+                        <a class="btn btn-outline-light text-dark" href="/admin/danhmuc" style="margin-right: 10px">
                             << Trở lại</a>
                                 <button class="btn btn-outline-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
-                                <a class="btn btn-outline-primary" href="{{ route('blog.restore') }}"
+                                <a class="btn btn-outline-primary" href="{{ route('danhmuc.restore') }}"
                                     style="margin-left: 10px">Khôi Phục Tất
                                     Cả</a>
                     </div>
@@ -42,37 +42,30 @@
                             <tr>
                                 <th><input type="checkbox" id="check_all"></th>
                                 <th>STT</th>
-                                <th style="width: 160px">Tiêu Đề</th>
-                                <th style="width: 500px">Nội Dung</th>
-                                <th>Ngày Đăng</th>
-                                <th>Số Bình Luận</th>
-                                <th>Ảnh</th>
-                                <th colspan="3">Hành Động</th>
+                                <th style="width: 160px">Tên Danh Mục</th>
+                                <th style="width: 500px">Ảnh</th>
+                                <th>Số Lượng SP</th>
+                                <th colspan="2">Hành Động</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @php
                                 $i = 1;
                             @endphp
-                            @foreach ($blogs_trash as $blog)
-                                <tr id="tr_{{ $blog->id }}">
-                                    <td><input type="checkbox" class="checkbox" data-id="{{ $blog->id }}">
+                            @foreach ($danhmucs_trash as $danhmuc)
+                                <tr id="tr_{{ $danhmuc->id }}">
+                                    <td><input type="checkbox" class="checkbox" data-id="{{ $danhmuc->id }}"></td>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $blog->tieude }}</td>
-                                    <td style="text-align:justify">
-                                        {!! html_entity_decode($blog->noidung) !!}
-                                    </td>
-                                    <td style="text-align: center">{{ $blog->ngaydang }}</td>
-                                    <td style="text-align: center">{{ $blog->sobinhluan }}</td>
-                                    <td><img src="{{ asset('images/blogs/' . $blog->anh) }}"
-                                            style="width:90px; height: 80px;" alt=""></td>
+                                    <td>{{ $danhmuc->ten }}</td>
+                                    <td><img src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}"
+                                            style="width:125px; height: 120px;" alt=""></td>
+                                    <td style="text-align: center">{{ $danhmuc->sanphams->count() }}</td>
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('blog.unTrash', $blog->id) }}"><i
+                                        <a class="btn btn-success" href="{{ route('danhmuc.unTrash', $danhmuc->id) }}"><i
                                                 class="fas fa-trash-restore"></i></a>
                                     </td>
                                     <td>
-                                        <form action="{{ route('blog.forceDelete', $blog->id) }}" method="post">
+                                        <form action="{{ route('danhmuc.forceDelete', $danhmuc->id) }}" method="post">
                                             @csrf
                                             <input name="_method" type="hidden" value="DELETE">
                                             <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm"
@@ -95,7 +88,7 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Bạn có muốn xóa vĩnh viễn blog này không?`,
+                    title: `Bạn có muốn xóa vĩnh viễn Danh Mục này không?`,
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -136,7 +129,7 @@
                     if (confirm("Bạn có muốn xóa các hàng đã chọn không?")) {
                         var strIds = idsArr.join(",");
                         $.ajax({
-                            url: "{{ route('blog.forceDeleteAll') }}",
+                            url: "{{ route('danhmuc.forceDeleteAll') }}",
                             type: 'GET',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

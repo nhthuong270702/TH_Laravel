@@ -1,4 +1,7 @@
 @extends('admin.masterlayout.masteradmin')
+
+@section('title', 'Cập nhật thông tin')
+
 @section('content')
     <div id="layoutSidenav_content">
         <main style="padding: 25px;background-color: rgb(237, 241, 245);">
@@ -64,8 +67,8 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <textarea name="noidung" id="editor">
-                                                                                    {{ $about->noidung }}
-                                                                                    </textarea>
+                                                                                        {{ $about->noidung }}
+                                                                                        </textarea>
                                         </div>
 
                                     </div>

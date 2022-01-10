@@ -81,7 +81,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
         Route::get('/edit/{id}', 'DanhMucController@edit')->name('edit');
         Route::put('/edit/{id}', 'DanhMucController@update')->name('update');
         Route::delete('/delete/{id}', 'DanhMucController@destroy')->name('destroy');
+        Route::get('/xoa-nhieu-danh-muc', 'DanhMucController@destroyAll')->name('destroyAll');
         Route::get('/search', 'DanhMucController@search')->name('search');
+        Route::get('/thung-rac', 'DanhMucController@trash')->name('trash');
+        Route::get('/khoi-phuc/{id}', 'DanhMucController@unTrash')->name('unTrash');
+        Route::delete('/xoa-vinh-vien/{id}', 'DanhMucController@forceDelete')->name('forceDelete');
+        Route::get('/xoa-vinh-vien', 'DanhMucController@forceDeleteAll')->name('forceDeleteAll');
+        Route::get('/khoi-phuc-danh-muc', 'DanhMucController@restore')->name('restore');
     });
 
     //blog

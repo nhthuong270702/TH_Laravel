@@ -1,13 +1,15 @@
 @extends('admin.masterlayout.masteradmin')
 
+@section('title', 'Danh sách thông tin')
+
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 30px; text-align: center">Quản Lí Thông Tin Giới Thiệu</h2>
-            <div class="row mb-3">
-                <div class="add">
+            <h1 style="margin-top: 30px; text-align: center">Quản Lí Thông Tin Giới Thiệu</h1>
+            <div class="card-header row mb-3">
+                <div class="add" style="display: flex; justify-content: center;">
                     <a style="float: left; padding-left: 10px;" href="{{ route('gioithieu.create') }}"><button
-                            class="btn btn-primary">Thêm Giới Thiệu</button></a>
+                            class="btn btn-primary"><i class="fas fa-plus"></i></button></a>
                 </div>
             </div>
             <div class="row">
@@ -23,7 +25,7 @@
                         <tr>
                             <th>STT</th>
                             <th>Tiêu Đề</th>
-                            <th>Nội Dung</th>
+                            <th style="width: 400px;">Nội Dung</th>
                             <th>Ảnh</th>
                             <th>Tiêu Chí 1</th>
                             <th>Tiêu Chí 2</th>
@@ -38,29 +40,29 @@
                         @endphp
                         @foreach ($abouts as $about)
                             <tr>
-                                <td>
+                                <td style="text-align: center">
                                     {{ $i++ }}
                                 </td>
                                 <td>{{ $about->tieude }}</td>
                                 <td>{!! html_entity_decode($about->noidung) !!}</td>
                                 <td><img src="{{ asset('images/abouts/' . $about->anh) }}"
-                                        style="width:90px; height: 80px;" alt=""></td>
+                                        style="width:200px; height: 180px;" alt=""></td>
                                 <td>{{ $about->tieuchi1 }}</td>
                                 <td>{{ $about->tieuchi2 }}</td>
                                 <td>{{ $about->tieuchi3 }}</td>
                                 <td>
-                                    <a class="btn btn-info" href="{{ route('gioithieu.show', $about->id) }}"><i
+                                    <a class="btn btn-outline-info" href="{{ route('gioithieu.show', $about->id) }}"><i
                                             class="far fa-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('gioithieu.edit', $about->id) }}"><i
+                                    <a class="btn btn-outline-warning" href="{{ route('gioithieu.edit', $about->id) }}"><i
                                             class="far fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{ route('gioithieu.destroy', $about->id) }}" method="post">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
-                                        <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm"
+                                        <button type="submit" class="btn btn-xs btn-outline-danger btn-flat show_confirm"
                                             data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
                                     </form>
                                 </td>
@@ -79,7 +81,7 @@
                         var name = $(this).data("name");
                         event.preventDefault();
                         swal({
-                                title: `Bạn có muốn xóa người dùng này không?`,
+                                title: `Bạn có muốn xóa thông tin này không?`,
                                 icon: "warning",
                                 buttons: true,
                                 dangerMode: true,

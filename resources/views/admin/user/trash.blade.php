@@ -93,7 +93,7 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Bạn có muốn xóa người dùng này không?`,
+                    title: `Bạn có muốn xóa vĩnh viễn người dùng này không?`,
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

@@ -13,7 +13,7 @@ class DanhMucController extends Controller
 
     public function index()
     {
-        $danhmucs = DanhMuc::paginate(10);
+        $danhmucs = DanhMuc::sortable()->paginate(10);
         return view('admin.danhmuc.list', compact('danhmucs'));
     }
 
@@ -77,5 +77,69 @@ class DanhMucController extends Controller
     {
         DanhMuc::find($id)->delete();
         return redirect()->route('danhmuc.index')->with('thongbao', 'Xóa thành công');
+    }
+    public function destroyAll(Request $request)
+    {
+        $ids = $request->ids;
+        DanhMuc::whereIn('id', explode(",", $ids))->delete();
+        return redirect()->back()->with('tb_xoa', 'Đã chuyển vào thùng rác');
+    }
+    public function trash()
+    {
+        $danhmucs_trash = DanhMuc::onlyTrashed()->get();
+        return view('admin.danhmuc.trash', compact('danhmucs_trash'));
+    }
+    public function unTrash($id)
+    {
+        $danhmuc = DanhMuc::onlyTrashed()->find($id);
+        $danhmuc->restore();
+        return redirect()->route('danhmuc.trash')->with('thongbao', 'Khôi phục thành công');
+    }
+    public function forceDelete($id)
+    {
+        $danhmuc = DanhMuc::onlyTrashed()->find($id);
+        $danhmuc->forceDelete();
+        return redirect()->route('danhmuc.trash')->with('thongbao', 'Xóa thành công');
+    }
+    public function forceDeleteAll()
+    {
+        $danhmuc = DanhMuc::onlyTrashed();
+        $danhmuc->forceDelete();
+        return redirect()->route('danhmuc.trash')->with('thongbao', 'Xóa thành công');
+    }
+    public function restore()
+    {
+        $sanpham = DanhMuc::onlyTrashed();
+        $sanpham->restore();
+        return redirect()->route('danhmuc.trash')->with('thongbao', 'Khôi Phục Thành Công');
+    }
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = '';
+            $danhmucs = DanhMuc::where('ten', 'like', '%' . $request->search . '%')->get();
+            $i = 1;
+            foreach ($danhmucs as $al) {
+                $output .= '<tr id="tr_{{ $al->id }}">
+                                <td><input type="checkbox" class="checkbox" data-id="{{ $al->id }}">
+                            <td>' . $i++ . '</td>
+                            <td>' . $al->ten . '</td>
+                             <td><img src="../images/danhmuc/' .  $al->anh  . '"
+                                        style="width:125px; height: 120px;" alt=""></td>
+                                        
+                            <td><a href="/admin/danhmuc/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
+                            <td><a href="/admin/danhmuc/edit' . $al->id . '"><button class="btn btn-warning"><i
+                                            class="far fa-edit"></i></button></a></td>
+                            <td>
+                                    <form action="/admin/danhmuc/delete/' . $al->id . '" method="post">
+                                    ' . csrf_field() . '
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
+                                    </form>
+                               </td>
+                            </tr>';
+            }
+        }
+        return Response($output);
     }
 }

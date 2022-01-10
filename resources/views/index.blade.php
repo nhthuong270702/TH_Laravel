@@ -88,22 +88,25 @@
                             Catelogies</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <ul class="list text-center">
-                            @foreach ($danhmucs as $danhmuc)
-                                <li data-aos="flip-down">
-                                    <div class="card">
-                                        <img id="catelogy" src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}" alt="">
-                                        <div class="card-body">
-                                            <p class="card-text">{{ $danhmuc->ten }}</p>
+                @if (isset($danhmucs))
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="list text-center">
+                                @foreach ($danhmucs as $danhmuc)
+                                    <li data-aos="flip-down">
+                                        <div class="card">
+                                            <img id="catelogy" src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}"
+                                                alt="">
+                                            <div class="card-body">
+                                                <p class="card-text">{{ $danhmuc->ten }}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </section>
         <!-- end catelogy -->
@@ -148,15 +151,13 @@
                         <h1 style="float: left;">Explore <br> The Locations</h1>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-danger btn-location" style="background-color: #ff4367;">View
-                            all
-                            Locations</button>
+                        <button type="button" class="btn btn-danger btn-location" style="background-color: #ff4367;">Xem Tất
+                            Cả</button>
                     </div>
                 </div>
                 <div class="row mt-4 location">
                     @foreach ($sanpham3 as $sanpham)
-                        @if (isset($sanpham->deleted_at))
-                        @else
+                        @if (isset($sanpham))
                             <div class="col-md-4" data-aos="flip-left">
                                 <div class="card card-location">
                                     <div class="sale">
@@ -165,16 +166,23 @@
                                     <img class="card-img-top img-location"
                                         src="{{ asset('images/sanpham/' . $sanpham->anh) }}" alt="Card image cap">
                                     <div class="card-body">
-                                        <p style="height: 80px" class="card-text"><a href=""><b>
+                                        <p style="height: 70px" class="card-text"><a href=""><b>
                                                     {{ $sanpham->ten }}
                                                 </b></a>
                                         </p>
-                                        <b style="float: left">
-                                            <h4>Giá: {{ $sanpham->gia }}</h4>
-                                        </b> &#8363 <span
-                                            style="float: right; background-color: #ff4367; color: white; padding: 5px 10px">Đã
-                                            Bán:
-                                            <b>{{ $sanpham->soluongban }}</b></span>
+                                        <span style="float: left">
+                                            <b>
+                                                <h5>Giá: {{ $sanpham->gia }}&#8363</h5>
+                                            </b>
+                                            <small>Đã bán: {{ $sanpham->soluongban }} sản phẩm</small>
+                                        </span>
+
+                                        <a href="#">
+                                            <span
+                                                style="float: right; background-color: #ff4367; color: white; padding: 10px 15px">Mua
+                                                Ngay
+                                            </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -232,30 +240,31 @@
                 </div>
                 <div class="row mt-4">
                     @foreach ($sanphams as $sanpham)
-                        @if (isset($sanpham->deleted_at))
-                        @else
-                            <div class="col-md-3" data-aos="flip-left">
-                                <div class="card" style="width: 100%; margin-top: 10px">
-                                    <div class="card-body text">
-                                        <span class="title">{{ $sanpham->danhmuc->ten }}</span> <span
-                                            style="float: right;"><i class="far fa-heart"></i></span>
-                                        <hr>
-                                        <a href="">
-                                            <p class="card-text" style="color: #453be4; height: 80px;">
-                                                {{ $sanpham->ten }}</p>
-                                        </a>
-                                        <small><i class="fas fa-cart-arrow-down"></i> Số lượng đã bán:
-                                            {{ $sanpham->soluongban }}</small>
-                                        <br>
-                                        <br>
-                                        <span
-                                            style="color: #ff4367; font-size: 20px; font-weight: bolder;">{{ $sanpham->gia }}&#8363
-                                        </span>
-                                        <small
-                                            style="float: right; margin-top: 7px;"><i>{{ $sanpham->ngaydang }}</i></small>
+                        @if (isset($sanpham))
+                            @if ($sanpham->danhmuc)
+                                <div class="col-md-3" data-aos="flip-left">
+                                    <div class="card" style="width: 100%; margin-top: 10px">
+                                        <div class="card-body text">
+                                            <span class="title">{{ $sanpham->danhmuc->ten }}</span> <span
+                                                style="float: right;"><i class="far fa-heart"></i></span>
+                                            <hr>
+                                            <a href="">
+                                                <p class="card-text" style="color: #453be4; height: 80px;">
+                                                    {{ $sanpham->ten }}</p>
+                                            </a>
+                                            <small><i class="fas fa-cart-arrow-down"></i> Số lượng đã bán:
+                                                {{ $sanpham->soluongban }}</small>
+                                            <br>
+                                            <br>
+                                            <span
+                                                style="color: #ff4367; font-size: 20px; font-weight: bolder;">{{ $sanpham->gia }}&#8363
+                                            </span>
+                                            <small
+                                                style="float: right; margin-top: 7px;"><i>{{ $sanpham->ngaydang }}</i></small>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         @endif
                     @endforeach
                 </div>
@@ -272,119 +281,31 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    <div class="col-md-4" data-aos="zoom-in">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <i class="fab fa-sellcast fa-4x icon" style="color: #ff4367;"></i>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <h4>Sell Your Item Safely</h4>
-                                        <p>Plus, it does this with only two requi#ff4367 classes thanks to flexbox.
-                                        </p>
-                                        <a href="">
-                                            <p>Read More <i class="fas fa-chevron-right"></i></p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="zoom-in">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <i class="fas fa-headphones-alt fa-4x icon" style="color: #ff4367;"></i>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <h4>Sell Your Item Safely</h4>
-                                        <p>Plus, it does this with only two requi#ff4367 classes thanks to flexbox.
-                                        </p>
-                                        <a href="">
-                                            <p>Read More <i class="fas fa-chevron-right"></i></p>
-                                        </a>
+                    @foreach ($blog6 as $blog)
+                        @if (isset($blog->deleted_at))
+                        @else
+                            <div class="col-md-4 mt-3" data-aos="zoom-in">
+                                <div class="card" style="width: 100%;">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <i class="fab fa-sellcast fa-4x icon" style="color: #ff4367;"></i>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <h4>{{ $blog->tieude }}</h4>
+
+                                                {!! html_entity_decode($blog->noidung) !!}
+
+                                                <a href="">
+                                                    Read More <i class="fas fa-chevron-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="zoom-in">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <i class="fab fa-apple fa-4x icon" style="color: #ff4367;"></i>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <h4>Sell Your Item Safely</h4>
-                                        <p>Plus, it does this with only two requi#ff4367 classes thanks to flexbox.
-                                        </p>
-                                        <a href="">
-                                            <p>Read More <i class="fas fa-chevron-right"></i></p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4" data-aos="zoom-in">
-                    <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <i class="fas fa-biohazard fa-4x icon" style="color: #ff4367;"></i>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <h4>Sell Your Item Safely</h4>
-                                        <p>Plus, it does this with only two required classes thanks to flexbox.</p>
-                                        <a href="">
-                                            <p>Read More <i class="fas fa-chevron-right"></i></p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <i class="fab fa-bitcoin fa-4x icon" style="color: #ff4367;"></i>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <h4>Sell Your Item Safely</h4>
-                                        <p>Plus, it does this with only two required classes thanks to flexbox.</p>
-                                        <a href="">
-                                            <p>Read More <i class="fas fa-chevron-right"></i></p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <i class="fas fa-bug fa-4x icon" style="color: #ff4367;"></i>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <h4>Sell Your Item Safely</h4>
-                                        <p>Plus, it does this with only two required classes thanks to flexbox.</p>
-                                        <a href="">
-                                            <p>Read More <i class="fas fa-chevron-right"></i></p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -401,8 +322,8 @@
                 <div class="row">
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: -5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -moz-box-shadow: -5px -5px -5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-box-shadow: -5px -5px -5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -moz-box-shadow: -5px -5px -5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -webkit-box-shadow: -5px -5px -5px #666;">
                         <i class="fas fa-award fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
                         <b class="title">Beginners</b>
                         @if (isset($blog0->deleted_at))
@@ -430,8 +351,8 @@
                     </div>
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -moz-box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -webkit-box-shadow: 5px 5px 5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -moz-box-shadow: 5px 5px 5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -webkit-box-shadow: 5px 5px 5px #666;">
                         <i class="fab fa-asymmetrik fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
                         <b class="title">Premium</b>
                         @if (isset($blog2->deleted_at))

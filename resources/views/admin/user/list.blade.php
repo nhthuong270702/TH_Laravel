@@ -27,12 +27,9 @@
                             <div class="row">
                                 <div class="col-9">
                                     <a href="{{ route('user.create') }}"><button class="btn btn-success"><i
-                                                class="fas fa-user-plus"></i>Thêm Người
-                                            Dùng</button></a>
-                                    <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
-                                    <button class="btn btn-primary"><a style="color: white;text-decoration: none;"
-                                            href="{{ route('user.trash') }}">Thùng
-                                            rác</a></button>
+                                                class="fas fa-user-plus"></i></button></a>
+                                    <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã
+                                        Chọn</button>
                                 </div>
                                 <div class="col-3">
                                     <div class="input-group">
@@ -48,15 +45,15 @@
                         </div>
                     </div>
                     <div style="overflow-x:auto;">
-                        <table class="table table-striped table-bordered" style="background-color: white">
+                        <table class="table table-striped table-bordered text-center" style="background-color: white">
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" id="check_all"></th>
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Tên</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
-                                    <th colspan="3" scope="col">Hoạt Động</th>
+                                    <th style="color: #2a6efd">STT</th>
+                                    <th style="text-decoration: none">@sortablelink('name', 'Tên')</th>
+                                    <th>@sortablelink('email', 'Email')</th>
+                                    <th style="color: #2a6efd">Role</th>
+                                    <th colspan="3" style="color: #2a6efd">Hoạt Động</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,16 +72,18 @@
                                         @elseif($al->role == 0)
                                             <td>Người dùng</td>
                                         @endif
-                                        <td><a href=""><button class="btn btn-primary"><i
+                                        <td><a href=""><button class="btn btn-outline-info"><i
                                                         class="fas fa-eye"></i></button></a></td>
                                         <td><a href="{{ route('user.edit', [$al->id]) }}"><button
-                                                    class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a>
+                                                    class="btn btn-outline-warning"><i
+                                                        class="fas fa-user-edit"></i></button></a>
                                         </td>
                                         <td>
                                             <form action="{{ route('user.destroy', [$al->id]) }}" method="post">
                                                 @csrf
                                                 <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm"
+                                                <button type="submit"
+                                                    class="btn btn-xs btn-outline-danger btn-flat show_confirm"
                                                     data-toggle="tooltip" title='Delete'><i
                                                         class="fa fa-trash"></i></button>
                                             </form>

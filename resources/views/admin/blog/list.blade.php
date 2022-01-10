@@ -1,25 +1,27 @@
 @extends('admin.masterlayout.masteradmin')
 
+@section('title', 'Danh sách blog')
+
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 20px; text-align: center">Quản Lí Blog</h2>
-            <div class="add">
-                <div class="row">
-                    <div class="col-9">
-                        <a href="{{ route('blog.create') }}"><button class="btn btn-success">Thêm Blog</button></a>
-                        <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
-                        <button class="btn btn-primary"><a style="color: white;text-decoration: none;"
-                                href="{{ route('blog.trash') }}">Thùng
-                                rác</a></button>
-                    </div>
-                    <div class="col-3">
-                        <div class="input-group">
-                            <input class="form-control mr-sm-2" type="search" name="search" id="search"
-                                placeholder="Từ khóa tìm kiếm...">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
-                                        class="fas fa-search"></i></button>
+            <h1 style="margin-top: 10px; text-align: center">Quản Lí Blog</h1>
+            <div class="card-header mt-5 mb-3">
+                <div class="add">
+                    <div class="row">
+                        <div class="col-9">
+                            <a href="{{ route('blog.create') }}"><button class="btn btn-success"><i
+                                        class="fas fa-plus"></i></button></a>
+                            <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <input class="form-control mr-sm-2" type="search" name="search" id="search"
+                                    placeholder="Từ khóa tìm kiếm...">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -32,18 +34,22 @@
                     </div>
                 @endif
             </div>
-            <div class="row">
+            @if ($blogs->isEmpty())
+                <div class="col-12 text-center mt-5">
+                    {{ 'Bạn chưa đăng blogs nào hoặc đã xóa. Vui lòng kiểm tra trong thùng rác!' }}
+                </div>
+            @else
                 <table class="table table-striped table-bordered text-center" style="background-color: white">
                     <thead>
                         <tr>
                             <th><input type="checkbox" id="check_all"></th>
                             <th>STT</th>
-                            <th style="width: 160px">Tiêu Đề</th>
-                            <th style="width: 500px">Nội Dung</th>
-                            <th>Ngày Đăng</th>
-                            <th>Số Bình Luận</th>
-                            <th>Ảnh</th>
-                            <th colspan="3">Hành Động</th>
+                            <th style="width: 160px">@sortablelink('tieude', 'Tiêu Đề')</th>
+                            <th style="width: 350px; color: #2a6efd">Nội Dung</th>
+                            <th>@sortablelink('ngaydang', 'Ngày Đăng')</th>
+                            <th style="color: #2a6efd">Số Bình Luận</th>
+                            <th style="color: #2a6efd">Ảnh</th>
+                            <th colspan="3" style="color: #2a6efd">Hành Động</th>
                         </tr>
                     </thead>
 
@@ -54,28 +60,28 @@
                         @foreach ($blogs as $blog)
                             <tr id="tr_{{ $blog->id }}">
                                 <td><input type="checkbox" class="checkbox" data-id="{{ $blog->id }}">
-                                <td>{{ $i++ }}</td>
+                                <td style="text-align: center">{{ $i++ }}</td>
                                 <td>{{ $blog->tieude }}</td>
                                 <td style="text-align:justify">
                                     {!! html_entity_decode($blog->noidung) !!}
                                 </td>
                                 <td style="text-align: center">{{ $blog->ngaydang }}</td>
                                 <td style="text-align: center">{{ $blog->sobinhluan }}</td>
-                                <td><img src="{{ asset('images/blogs/' . $blog->anh) }}" style="width:90px; height: 80px;"
-                                        alt=""></td>
+                                <td style="text-align: center"><img src="{{ asset('images/blogs/' . $blog->anh) }}"
+                                        style="width:150px; height: 120px;" alt=""></td>
                                 <td>
-                                    <a class="btn btn-info" href="{{ route('blog.show', $blog->id) }}"><i
+                                    <a class="btn btn-outline-info" href="{{ route('blog.show', $blog->id) }}"><i
                                             class="far fa-eye"></i></a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning" href="{{ route('blog.edit', $blog->id) }}"><i
+                                    <a class="btn btn-outline-warning" href="{{ route('blog.edit', $blog->id) }}"><i
                                             class="far fa-edit"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{ route('blog.destroy', $blog->id) }}" method="post">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
-                                        <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm"
+                                        <button type="submit" class="btn btn-xs btn-outline-danger btn-flat show_confirm"
                                             data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
                                     </form>
                                 </td>
@@ -86,7 +92,7 @@
                 <div style="float: right;" class="phantrang">
                     {!! $blogs->links() !!}
                 </div>
-            </div>
+            @endif
     </div>
     </div>
     </main>
@@ -99,7 +105,7 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Bạn có muốn xóa người dùng này không?`,
+                    title: `Bạn có muốn xóa blog này không?`,
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

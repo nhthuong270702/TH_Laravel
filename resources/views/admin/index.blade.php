@@ -1,6 +1,6 @@
 @extends('admin.masterlayout.masteradmin')
 
-@section('title', 'Home')
+@section('title', 'AMIN | Trang Chủ')
 
 
 @section('content')

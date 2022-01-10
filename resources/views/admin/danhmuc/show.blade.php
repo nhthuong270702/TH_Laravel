@@ -1,9 +1,12 @@
 @extends('admin.masterlayout.masteradmin')
 
+@section('title', 'Chi tiết danh mục')
+
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 30px; text-align: center">Quản Lí Các Sản Phẩm Thuộc Danh Mục {{ $danhmuc->ten }}</h2>
+            <h2 style="margin-top: 30px; text-align: center">Quản Lí Các Sản Phẩm Thuộc Danh Mục <br> {{ $danhmuc->ten }}
+            </h2>
             <div class="row">
                 <a class="btn btn-secondary btn-sm" style="float: left; width: 100px"
                     href="{{ route('danhmuc.index') }}">Trở

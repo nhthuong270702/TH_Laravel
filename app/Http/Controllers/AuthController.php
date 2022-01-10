@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
@@ -13,6 +14,13 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            if ($request->has('rememberme')) {
+                Cookie::queue('email', $request->email, 101);
+                Cookie::queue('password', $request->password, 101);
+            } else {
+                Cookie::queue(Cookie::forget('email'));
+                Cookie::queue(Cookie::forget('password'));
+            }
             $role = Auth::user()->role;
             if ($role == 1) {
                 return redirect()->route('adminpage');

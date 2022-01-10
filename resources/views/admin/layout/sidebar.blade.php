@@ -24,13 +24,26 @@
                     Sản Phẩm
                 </a>
                 <a class="nav-link collapsed" href="/admin/blog">
-                    <div class="sb-nav-link-icon"><i class="fas fa-blog"></i></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-blog"></i></div>
                     Blog
                 </a>
                 <a class="nav-link collapsed" href="/admin/gioithieu">
-                    <div class="sb-nav-link-icon"><i class="fas fa-id-card-alt"></i></i></div>
+                    <div class="sb-nav-link-icon"><i class="fas fa-id-card-alt"></i></div>
                     Giới Thiệu
                 </a>
+                <div class="dropdown nav-link collapsed">
+                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        style="width: 100%; background-color: #212529; color: white; text-align: left; padding: 0">
+                        <i class="far fa-trash-alt"></i> Thùng Rác
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ route('user.trash') }}">Người Dùng</a></li>
+                        <li><a class="dropdown-item" href="{{ route('danhmuc.trash') }}">Danh Mục</a></li>
+                        <li><a class="dropdown-item" href="{{ route('sanpham.trash') }}">Sản Phẩm</a></li>
+                        <li><a class="dropdown-item" href="{{ route('blog.trash') }}">Blogs</a></li>
+                    </ul>
+                </div>
             </div>
     </nav>
 </div>

@@ -1,4 +1,7 @@
 @extends('admin.masterlayout.masteradmin')
+
+@section('title', 'Thêm thông tin')
+
 @section('content')
     <div id="layoutSidenav_content">
         <main style="padding: 25px;background-color: rgb(237, 241, 245);">

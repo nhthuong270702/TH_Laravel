@@ -28,7 +28,6 @@ body {
 }
 .right .navbar-nav .nav-item a:hover {
     color: #ff4367;
-    font-weight: bold;
     text-decoration: overline;
 }
 /* end navbar */
@@ -36,7 +35,7 @@ body {
 /* banner 1 */
 .banner-1 {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.5)),
-        url("https://anhdephd.com/wp-content/uploads/2018/02/hinh-anh-dep-wallpaper.jpg");
+        url("https://phunugioi.com/wp-content/uploads/2020/02/mau-background-dep.jpg");
     width: 100%;
     float: left;
     background-repeat: no-repeat;
@@ -53,7 +52,7 @@ body {
     background-color: #453be4;
     height: 130px;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 100px;
 }
 .keywords {
     list-style: none;
@@ -115,13 +114,13 @@ body {
 /* location */
 .img-location {
     border-radius: 10px;
-    height: 320px;
+    height: 300px;
     margin-top: 20px;
     padding: 30px;
 }
 .img-blog {
     border-radius: 10px;
-    height: 300px;
+    height: 330px;
 }
 .card-location {
     border-radius: 10px;
@@ -146,7 +145,7 @@ body {
 /* end location */
 /* banner3 */
 .banner-3 {
-    background-image: url("https://media.istockphoto.com/photos/female-hands-typing-on-laptop-student-workspace-banner-with-copy-picture-id1224536710?k=20&m=1224536710&s=170667a&w=0&h=YKTq4LA2K75tffgcj7w10irraEwWPH-DWFNl-UfwasA=");
+    background-image: url("https://kynguyenlamdep.com/wp-content/uploads/2020/04/ban-lam-viec.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 500px;
@@ -287,7 +286,7 @@ hr {
     }
     /* banner-1 */
     .banner-1 {
-        height: 750px;
+        height: 900px;
         width: 100%;
     }
     .search {
@@ -375,10 +374,19 @@ hr {
         text-align: center;
     }
     .classified .icon {
-        font-size: 40px;
+        font-size: 50px;
     }
     .classified .card {
         margin-top: 10px;
+    }
+    .classified p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 25px;
+        -webkit-line-clamp: 3;
+        height: 150px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
     }
     /* a plan */
     .plan .title {
@@ -561,10 +569,18 @@ hr {
     .classified h4 {
         font-size: 15px;
         font-weight: bold;
+        height: 60px;
     }
     .classified p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 23px;
+        -webkit-line-clamp: 3;
+        height: 200px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         font-size: 12px;
-        color: black;
+        text-align: justify;
     }
     /* end Classified */
     /* a plan */
@@ -669,9 +685,18 @@ hr {
     }
     .classified h4 {
         font-size: 22px;
+        height: 80px;
     }
     .classified p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 23px;
+        -webkit-line-clamp: 3;
+        height: 160px;
+        display: -webkit-box;
         font-size: 16px;
+        -webkit-box-orient: vertical;
+        text-align: justify;
     }
     /* a plan */
     .plan .title {
@@ -796,9 +821,19 @@ hr {
     }
     .classified h4 {
         font-size: 24px;
+        height: 80px;
     }
     .classified p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 25px;
+        -webkit-line-clamp: 3;
+        height: 150px;
         font-size: 16px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        width: 100%;
+        text-align: justify;
     }
     .card-text {
         font-size: 16px;

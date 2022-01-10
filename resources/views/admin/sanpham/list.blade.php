@@ -3,20 +3,16 @@
 @section('title', 'Quản lí sản phẩm')
 
 @section('content')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 20px 0px; text-align: center">Quản Lí Sản Phẩm</h2>
-            <div class="card-header mt-5">
+            <h1 style="margin-top: 30px 0px; text-align: center">Quản Lí Sản Phẩm</h1>
+            <div class="card-header mt-5 mb-3">
                 <div class="add">
                     <div class="row">
                         <div class="col-9">
-                            <a href="{{ route('sanpham.create') }}"><button class="btn btn-success">Thêm Sản
-                                    Phẩm</button></a>
+                            <a href="{{ route('sanpham.create') }}"><button class="btn btn-success"><i
+                                        class="fas fa-plus"></i></button></a>
                             <button class="btn btn-danger delete-all" data-url="">Xóa Các Hàng Đã Chọn</button>
-                            <button class="btn btn-primary"><a style="color: white;text-decoration: none;"
-                                    href="{{ route('sanpham.trash') }}">Thùng
-                                    rác</a></button>
                         </div>
                         <div class="col-3">
                             <div class="input-group">
@@ -43,63 +39,76 @@
                     </div>
                 @endif
             </div>
-            <div style="overflow-x:auto;">
-                <table class="table table-striped table-bordered" style="background-color: white">
-                    <thead>
-                        <tr style="text-align: center">
-                            <th><input type="checkbox" id="check_all"></th>
-                            <th style="width: 50px">STT</th>
-                            <th style="width: 150px">Tên SP</th>
-                            <th style="width: 350px">Mô Tả</th>
-                            <th style="width: 100px">Giá Bán</th>
-                            <th style="width: 100px">Số Lượng</th>
-                            <th style="width: 110px">Ngày Đăng</th>
-                            <th style="width: 150px">Ảnh</th>
-                            <th colspan="3">Hành Động</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-                        @foreach ($sanphams as $sanpham)
-                            <tr id="tr_{{ $sanpham->id }}" style="text-align: justify">
-                                <td><input type="checkbox" class="checkbox" data-id="{{ $sanpham->id }}">
-                                </td>
-                                </td>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $sanpham->ten }}</td>
-                                <td>{!! html_entity_decode($sanpham->mota) !!}</td>
-                                <td style="text-align: center">{{ $sanpham->gia }}</td>
-                                <td style="text-align: center">{{ $sanpham->soluongban }}</td>
-                                <td>{{ $sanpham->ngaydang }}</td>
-                                <td style="text-align: center"><img src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
-                                        style="width:90px; height: 80px;" alt=""></td>
-                                <td>
-                                    <a class="btn btn-info" href="{{ route('sanpham.show', $sanpham->id) }}"><i
-                                            class="far fa-eye"></i></a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-warning" href="{{ route('sanpham.edit', $sanpham->id) }}"><i
-                                            class="far fa-edit"></i></a>
-                                </td>
-                                <td>
-                                    <form action="{{ route('sanpham.destroy', $sanpham->id) }}" method="post">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm"
-                                            data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div style="float: right;" class="phantrang">
-                    {!! $sanphams->links() !!}
+            @if ($sanphams->isEmpty())
+                <div class="col-12 text-center mt-5">
+                    {{ 'Bạn chưa đăng sản phẩm nào hoặc đã xóa. Vui lòng kiểm tra trong thùng rác!' }}
                 </div>
-            </div>
+            @else
+                <div style="overflow-x:auto;">
+                    <table class="table table-striped table-bordered" style="background-color: white">
+                        <thead>
+                            <tr style="text-align: center;">
+                                <th><input type="checkbox" id="check_all"></th>
+                                <th style="width: 80px; color: #2a6efd">#</th>
+                                <th style="width: 150px">@sortablelink('ten', 'Tên SP')</th>
+                                <th style="width: 330px; color: #2a6efd">Mô Tả</th>
+                                <th style="width: 100px">@sortablelink('gia', 'Giá Bán')</th>
+                                <th style="width: 150px;">@sortablelink('soluongban', 'Số Lượng')</th>
+                                <th style="width: 140px">@sortablelink('ngaydang', 'Ngày Đăng')</th>
+                                <th style="width: 130px; color: #2a6efd">Ảnh</th>
+                                <th colspan="3" style="color: #2a6efd">Hành Động</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @if ($sanphams->count())
+                                @foreach ($sanphams as $sanpham)
+                                    <tr id="tr_{{ $sanpham->id }}" style="text-align: justify">
+                                        <td><input type="checkbox" class="checkbox" data-id="{{ $sanpham->id }}">
+                                        </td>
+                                        </td>
+                                        <td style="text-align: center">{{ $i++ }}</td>
+                                        <td>{{ $sanpham->ten }}</td>
+                                        <td>{!! html_entity_decode($sanpham->mota) !!}</td>
+                                        <td style="text-align: center">{{ $sanpham->gia }}</td>
+                                        <td style="text-align: center">{{ $sanpham->soluongban }}</td>
+                                        <td>{{ $sanpham->ngaydang }}</td>
+                                        <td style="text-align: center"><img
+                                                src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
+                                                style="width:110px; height: 95px;" alt=""></td>
+                                        <td>
+                                            <a class="btn btn-outline-info"
+                                                href="{{ route('sanpham.show', $sanpham->id) }}"><i
+                                                    class="far fa-eye"></i></a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-warning"
+                                                href="{{ route('sanpham.edit', $sanpham->id) }}"><i
+                                                    class="far fa-edit"></i></a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('sanpham.destroy', $sanpham->id) }}" method="post">
+                                                @csrf
+                                                <input name="_method" type="hidden" value="DELETE">
+                                                <button type="submit"
+                                                    class="btn btn-xs btn-outline-danger btn-flat show_confirm"
+                                                    data-toggle="tooltip" title='Delete'><i
+                                                        class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                    <div style="float: right;" class="phantrang">
+                        {!! $sanphams->links() !!}
+                    </div>
+                </div>
+            @endif
         </main>
     </div>
     {{-- xoa nhieu --}}
@@ -171,7 +180,7 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                    title: `Bạn có muốn xóa người dùng này không?`,
+                    title: `Bạn có muốn xóa sản phẩm này không?`,
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,

@@ -14,7 +14,7 @@ class SanPhamController extends Controller
 
     public function index()
     {
-        $sanphams = SanPham::paginate(10);
+        $sanphams = SanPham::sortable()->paginate(10);
         return view('admin.sanpham.list', compact('sanphams'));
     }
 
@@ -47,13 +47,13 @@ class SanPhamController extends Controller
     {
         $data['sanpham'] = SanPham::find($id);
         $data['danhmuc'] = $data['sanpham']->danhmuc;
-        return view('admin.sanpham.chitietsanpham')->with($data);
+        return view('admin.sanpham.show')->with($data);
     }
     public function danhmuc($id)
     {
         $danhmucs = SanPham::find($id);
         $danhmucs->danhmuc();
-        return view('admin.product.create', compact('danhmucs'));
+        return view('admin.sanpham.create', compact('danhmucs'));
     }
 
     public function edit($id)
@@ -126,23 +126,23 @@ class SanPhamController extends Controller
     {
         if ($request->ajax()) {
             $output = '';
-            $users = SanPham::where('ten', 'like', '%' . $request->search . '%')
+            $sanphams = SanPham::where('ten', 'like', '%' . $request->search . '%')
                 ->orwhere('gia', 'like', '%' . $request->search . '%')->get();
             $i = 1;
-            foreach ($users as $al) {
-                $output .= '<tr>
-                            <td><input type="checkbox" name="ids" class="checkBoxClass" value=""></td>
+            foreach ($sanphams as $al) {
+                $output .= '<tr id="tr_{{ $al->id }}">
+                                <td><input type="checkbox" class="checkbox" data-id="{{ $al->id }}">
                             <td>' . $i++ . '</td>
                             <td>' . $al->ten . '</td>
                             <td style="text-align: justify">' . $al->mota . '</td>
                             <td>' . $al->gia . '</td>
                             <td>' . $al->soluongban . '</td>
                             <td>' . $al->ngaydang . '</td>
-                            <td style="text-align: center"><img src="{{ asset(' . 'images/sanpham/' . ' . $al->anh) }}"
-                                        style="width:90px; height: 80px;" alt=""></td>
+                            <td><img src="../images/sanpham/' .  $al->anh  . '"
+                                        style="width:110px; height: 95px;" alt=""></td>
                                 <td>
                             <td><a href="/admin/sanpham/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
-                            <td><a href="/admin/sanpham/edit' . $al->id . '"><button class="btn btn-warning"><i
+                            <td><a href="/admin/sanpham/edit/' . $al->id . '"><button class="btn btn-warning"><i
                                             class="far fa-edit"></i></button></a></td>
                             <td>
                                     <form action="/admin/sanpham/delete/' . $al->id . '" method="post">
