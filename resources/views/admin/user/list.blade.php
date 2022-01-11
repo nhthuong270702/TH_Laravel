@@ -2,8 +2,14 @@
 
 @section('title', 'Quản lí người dùng')
 
-
 @section('content')
+    <style>
+        th a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
     <div id="layoutSidenav_content">
         <main style="padding: 25px;">
             <div style="background-color:rgb(255, 255, 255);" class="container-fluid px-4 ">
@@ -49,11 +55,11 @@
                             <thead>
                                 <tr>
                                     <th><input type="checkbox" id="check_all"></th>
-                                    <th style="color: #2a6efd">STT</th>
+                                    <th>STT</th>
                                     <th style="text-decoration: none">@sortablelink('name', 'Tên')</th>
                                     <th>@sortablelink('email', 'Email')</th>
-                                    <th style="color: #2a6efd">Role</th>
-                                    <th colspan="3" style="color: #2a6efd">Hoạt Động</th>
+                                    <th>Role</th>
+                                    <th colspan="3">Hoạt Động</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -3,6 +3,13 @@
 @section('title', 'Quản lí sản phẩm')
 
 @section('content')
+    <style>
+        th a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
             <h1 style="margin-top: 30px 0px; text-align: center">Quản Lí Sản Phẩm</h1>
@@ -49,14 +56,14 @@
                         <thead>
                             <tr style="text-align: center;">
                                 <th><input type="checkbox" id="check_all"></th>
-                                <th style="width: 80px; color: #2a6efd">#</th>
+                                <th style="width: 80px;">#</th>
                                 <th style="width: 150px">@sortablelink('ten', 'Tên SP')</th>
-                                <th style="width: 330px; color: #2a6efd">Mô Tả</th>
+                                <th style="width: 330px;">Mô Tả</th>
                                 <th style="width: 100px">@sortablelink('gia', 'Giá Bán')</th>
                                 <th style="width: 150px;">@sortablelink('soluongban', 'Số Lượng')</th>
                                 <th style="width: 140px">@sortablelink('ngaydang', 'Ngày Đăng')</th>
-                                <th style="width: 130px; color: #2a6efd">Ảnh</th>
-                                <th colspan="3" style="color: #2a6efd">Hành Động</th>
+                                <th style="width: 130px;">Ảnh</th>
+                                <th colspan="3">Hành Động</th>
                             </tr>
                         </thead>
 

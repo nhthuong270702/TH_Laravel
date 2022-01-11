@@ -309,7 +309,7 @@ hr {
         display: none;
     }
     #catelogy {
-        font-size: 24px;
+        font-size: 20px;
     }
     .list li {
         margin-right: 6px;
@@ -513,7 +513,7 @@ hr {
         width: 120px;
     }
     #catelogy {
-        font-size: 35px;
+        font-size: 30px;
     }
     .catelogy .btn-popu {
         margin-top: 35px;
@@ -659,7 +659,7 @@ hr {
         font-size: 14px;
     }
     #catelogy {
-        font-size: 40px;
+        font-size: 20px;
     }
     .catelogy .btn-popu {
         margin-top: 40px;
@@ -760,7 +760,7 @@ hr {
         margin-right: 15px;
     }
     #catelogy {
-        font-size: 60px;
+        font-size: 30px;
     }
     .catelogy .btn-popu {
         margin-top: 40px;

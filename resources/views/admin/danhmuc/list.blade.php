@@ -1,8 +1,15 @@
 @extends('admin.masterlayout.masteradmin')
 
-@section('title', 'Danh sách sanh mục')
+@section('title', 'Danh sách danh mục')
 
 @section('content')
+    <style>
+        th a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
             <h1 style="margin-top: 30px; text-align: center">Quản Lí Danh Mục Sản Phẩm</h1>
@@ -32,55 +39,64 @@
                     </div>
                 @endif
             </div>
-            <div class="row">
-                <table class="table table-striped table-bordered text-center" style="background-color: white">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox" id="check_all"></th>
-                            <th style="color: #2a6efd">STT</th>
-                            <th>@sortablelink('ten', 'Tên Danh Mục')</th>
-                            <th style="color: #2a6efd">Ảnh</th>
-                            <th style="color: #2a6efd">Số Lượng SP</th>
-                            <th colspan="3" style="color: #2a6efd">Hành Động</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @php
-                            $i = 1;
-                        @endphp
-                        @foreach ($danhmucs as $danhmuc)
-                            <tr id="tr_{{ $danhmuc->id }}">
-                                <td><input type="checkbox" class="checkbox" data-id="{{ $danhmuc->id }}">
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $danhmuc->ten }}</td>
-                                <td><img src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}"
-                                        style="width:125px; height: 120px;" alt=""></td>
-                                <td>{{ $danhmuc->sanphams->count() }}</td>
-                                <td>
-                                    <a class="btn btn-outline-info" href="{{ route('danhmuc.show', $danhmuc->id) }}"><i
-                                            class="far fa-eye"></i></a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-warning" href="{{ route('danhmuc.edit', $danhmuc->id) }}"><i
-                                            class="far fa-edit"></i></a>
-                                </td>
-                                <td>
-                                    <form action="{{ route('danhmuc.destroy', $danhmuc->id) }}" method="post">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="DELETE">
-                                        <button type="submit" class="btn btn-xs btn-outline-danger btn-flat show_confirm"
-                                            data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                <div style="float: right;" class="phantrang">
-                    {!! $danhmucs->links() !!}
+            @if ($danhmucs->isEmpty())
+                <div class="col-12 text-center mt-5">
+                    {{ 'Bạn chưa đăng danh mục nào hoặc đã xóa. Vui lòng kiểm tra trong thùng rác!' }}
                 </div>
-            </div>
+            @else
+                <div class="row">
+                    <table class="table table-striped table-bordered text-center" style="background-color: white">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="check_all"></th>
+                                <th>STT</th>
+                                <th>@sortablelink('ten', 'Tên Danh Mục')</th>
+                                <th>Ảnh</th>
+                                <th>Số Lượng SP</th>
+                                <th colspan="3">Hành Động</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($danhmucs as $danhmuc)
+                                <tr id="tr_{{ $danhmuc->id }}">
+                                    <td><input type="checkbox" class="checkbox" data-id="{{ $danhmuc->id }}">
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $danhmuc->ten }}</td>
+                                    <td><img src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}"
+                                            style="width:125px; height: 120px;" alt=""></td>
+                                    <td>{{ $danhmuc->sanphams->count() }}</td>
+                                    <td>
+                                        <a class="btn btn-outline-info"
+                                            href="{{ route('danhmuc.show', $danhmuc->id) }}"><i
+                                                class="far fa-eye"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-warning"
+                                            href="{{ route('danhmuc.edit', $danhmuc->id) }}"><i
+                                                class="far fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('danhmuc.destroy', $danhmuc->id) }}" method="post">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button type="submit"
+                                                class="btn btn-xs btn-outline-danger btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <div style="float: right;" class="phantrang">
+                        {!! $danhmucs->links() !!}
+                    </div>
+                </div>
+            @endif
         </main>
     </div>
     {{-- xoa 1 --}}
@@ -132,7 +148,7 @@
                     if (confirm("Bạn có muốn xóa các hàng đã chọn không?")) {
                         var strIds = idsArr.join(",");
                         $.ajax({
-                            url: "{{ route('blog.destroyAll') }}",
+                            url: "{{ route('danhmuc.destroyAll') }}",
                             type: 'GET',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

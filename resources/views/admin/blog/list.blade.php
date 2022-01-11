@@ -3,6 +3,13 @@
 @section('title', 'Danh sách blog')
 
 @section('content')
+    <style>
+        th a {
+            text-decoration: none;
+            color: black;
+        }
+
+    </style>
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
             <h1 style="margin-top: 10px; text-align: center">Quản Lí Blog</h1>
@@ -45,11 +52,11 @@
                             <th><input type="checkbox" id="check_all"></th>
                             <th>STT</th>
                             <th style="width: 160px">@sortablelink('tieude', 'Tiêu Đề')</th>
-                            <th style="width: 350px; color: #2a6efd">Nội Dung</th>
+                            <th style="width: 350px;">Nội Dung</th>
                             <th>@sortablelink('ngaydang', 'Ngày Đăng')</th>
-                            <th style="color: #2a6efd">Số Bình Luận</th>
-                            <th style="color: #2a6efd">Ảnh</th>
-                            <th colspan="3" style="color: #2a6efd">Hành Động</th>
+                            <th>Số Bình Luận</th>
+                            <th>Ảnh</th>
+                            <th colspan="3">Hành Động</th>
                         </tr>
                     </thead>
 

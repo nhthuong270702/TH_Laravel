@@ -14,7 +14,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::sortable()->paginate(10);
-        return view('admin.Blog.list', compact('blogs'));
+        return view('admin.blog.list', compact('blogs'));
     }
 
     public function create()

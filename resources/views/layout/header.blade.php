@@ -16,12 +16,12 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown" style="float: right;">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Trang Chủ</a>
+                            <a class="nav-link active" href="#">TRANG CHỦ</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Danh Mục
+                                DANH MỤC
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Action</a>
@@ -30,31 +30,30 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Sản Phẩm</a>
+                            <a class="nav-link" href="#">SẢN PHẨM</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Blog</a>
+                            <a class="nav-link" href="#">BLOG</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Trang</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Liên Hệ</a>
+                            <a class="nav-link" href="#">LIÊN HỆ</a>
                         </li>
                         @if (Auth::check())
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Tài Khoản
+                                    TÀI KHOẢN
                                 </a>
                                 <div class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink"
                                     style="padding: 7px">
                                     Xin Chào
                                     <h6><b>{{ Auth::user()->name }}</b></h6>
                                     <hr>
-                                    <a class="dropdown-item" href="/admin">ADMIN</a>
-                                    <a class="dropdown-item" href="/dangxuat">Đăng Xuất</a>
+                                    @if (Auth::user()->role == 1)
+                                        <a class="dropdown-item" href="/admin">ADMIN</a>
+                                    @endif
                                     <a class="dropdown-item" href="#">Cập Nhật TK</a>
+                                    <a class="dropdown-item" href="/dangxuat">Đăng Xuất</a>
                                 </div>
                             </li>
                         @else

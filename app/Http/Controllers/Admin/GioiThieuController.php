@@ -44,7 +44,7 @@ class GioiThieuController extends Controller
     public function show($id)
     {
         $data['about'] = GioiThieu::find($id);
-        return view('admin.Blog.show')->with($data);
+        return view('admin.gioithieu.show')->with($data);
     }
 
     public function edit($id)

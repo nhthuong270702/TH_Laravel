@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('gioithieu', $gioithieu);
 
         //danh muc
-        $danhmucs = DanhMuc::all();
+        $danhmucs = DB::table('danh_muc')->orderBy('id', 'desc')->take(10)->get();
         view()->share('danhmucs', $danhmucs);
 
         $danhmuc5 = DB::table('danh_muc')->orderBy('id', 'desc')->take(5)->get();
