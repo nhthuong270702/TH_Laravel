@@ -51,69 +51,66 @@
                     {{ 'Bạn chưa đăng sản phẩm nào hoặc đã xóa. Vui lòng kiểm tra trong thùng rác!' }}
                 </div>
             @else
-                <div style="overflow-x:auto;">
-                    <table class="table table-striped table-bordered" style="background-color: white">
-                        <thead>
-                            <tr style="text-align: center;">
-                                <th><input type="checkbox" id="check_all"></th>
-                                <th style="width: 80px;">#</th>
-                                <th style="width: 150px">@sortablelink('ten', 'Tên SP')</th>
-                                <th style="width: 330px;">Mô Tả</th>
-                                <th style="width: 100px">@sortablelink('gia', 'Giá Bán')</th>
-                                <th style="width: 150px;">@sortablelink('soluongban', 'Số Lượng')</th>
-                                <th style="width: 140px">@sortablelink('ngaydang', 'Ngày Đăng')</th>
-                                <th style="width: 130px;">Ảnh</th>
-                                <th colspan="3">Hành Động</th>
-                            </tr>
-                        </thead>
+                <table class="table table-striped table-bordered" style="background-color: white">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th><input type="checkbox" id="check_all"></th>
+                            <th style="width: 80px;">#</th>
+                            <th style="width: 150px">@sortablelink('ten', 'Tên SP')</th>
+                            <th style="width: 330px;">Mô Tả</th>
+                            <th style="width: 100px">@sortablelink('gia', 'Giá Bán')</th>
+                            <th style="width: 150px;">@sortablelink('soluongban', 'Số Lượng')</th>
+                            <th style="width: 140px">@sortablelink('ngaydang', 'Ngày Đăng')</th>
+                            <th style="width: 130px;">Ảnh</th>
+                            <th colspan="3">Hành Động</th>
+                        </tr>
+                    </thead>
 
-                        <tbody>
-                            @php
-                                $i = 1;
-                            @endphp
-                            @if ($sanphams->count())
-                                @foreach ($sanphams as $sanpham)
-                                    <tr id="tr_{{ $sanpham->id }}" style="text-align: justify">
-                                        <td><input type="checkbox" class="checkbox" data-id="{{ $sanpham->id }}">
-                                        </td>
-                                        </td>
-                                        <td style="text-align: center">{{ $i++ }}</td>
-                                        <td>{{ $sanpham->ten }}</td>
-                                        <td>{!! html_entity_decode($sanpham->mota) !!}</td>
-                                        <td style="text-align: center">{{ $sanpham->gia }}</td>
-                                        <td style="text-align: center">{{ $sanpham->soluongban }}</td>
-                                        <td>{{ $sanpham->ngaydang }}</td>
-                                        <td style="text-align: center"><img
-                                                src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
-                                                style="width:110px; height: 95px;" alt=""></td>
-                                        <td>
-                                            <a class="btn btn-outline-info"
-                                                href="{{ route('sanpham.show', $sanpham->id) }}"><i
-                                                    class="far fa-eye"></i></a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-outline-warning"
-                                                href="{{ route('sanpham.edit', $sanpham->id) }}"><i
-                                                    class="far fa-edit"></i></a>
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('sanpham.destroy', $sanpham->id) }}" method="post">
-                                                @csrf
-                                                <input name="_method" type="hidden" value="DELETE">
-                                                <button type="submit"
-                                                    class="btn btn-xs btn-outline-danger btn-flat show_confirm"
-                                                    data-toggle="tooltip" title='Delete'><i
-                                                        class="fa fa-trash"></i></button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                    <div style="float: right;" class="phantrang">
-                        {!! $sanphams->links() !!}
-                    </div>
+                    <tbody>
+                        @php
+                            $i = 1;
+                        @endphp
+                        @if ($sanphams->count())
+                            @foreach ($sanphams as $sanpham)
+                                <tr id="tr_{{ $sanpham->id }}" style="text-align: justify">
+                                    <td><input type="checkbox" class="checkbox" data-id="{{ $sanpham->id }}">
+                                    </td>
+                                    </td>
+                                    <td style="text-align: center">{{ $i++ }}</td>
+                                    <td>{{ $sanpham->ten }}</td>
+                                    <td>{!! html_entity_decode($sanpham->mota) !!}</td>
+                                    <td style="text-align: center">{{ $sanpham->gia }}</td>
+                                    <td style="text-align: center">{{ $sanpham->soluongban }}</td>
+                                    <td>{{ $sanpham->ngaydang }}</td>
+                                    <td style="text-align: center"><img
+                                            src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
+                                            style="width:110px; height: 95px;" alt=""></td>
+                                    <td>
+                                        <a class="btn btn-outline-info"
+                                            href="{{ route('sanpham.show', $sanpham->id) }}"><i
+                                                class="far fa-eye"></i></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-warning"
+                                            href="{{ route('sanpham.edit', $sanpham->id) }}"><i
+                                                class="far fa-edit"></i></a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('sanpham.destroy', $sanpham->id) }}" method="post">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button type="submit"
+                                                class="btn btn-xs btn-outline-danger btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
+                <div style="float: left;" class="phantrang">
+                    {!! $sanphams->links() !!}
                 </div>
             @endif
         </main>

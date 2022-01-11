@@ -14,7 +14,7 @@ class SanPhamController extends Controller
 
     public function index()
     {
-        $sanphams = SanPham::sortable()->paginate(10);
+        $sanphams = SanPham::sortable()->simplePaginate(5);
         return view('admin.sanpham.list', compact('sanphams'));
     }
 

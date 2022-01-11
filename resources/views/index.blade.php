@@ -4,7 +4,7 @@
     <main id="content">
         <!-- banner1 -->
         <section class="banner-1">
-            <div class="container" style=" color: white;">
+            <div class="container" style=" color: white; text-align: justify">
                 <h1 class="text-title">{{ $gioithieu->tieude }}</h1>
                 <p class="text-body">{!! html_entity_decode($gioithieu->noidung) !!}</p>
                 <button type=" button" class="btn btn-danger btn-1" style="background-color: #ff4367;">Browse
@@ -98,7 +98,8 @@
                                             <img id="catelogy" src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}"
                                                 alt="">
                                             <div class="card-body">
-                                                <p class="card-text">{{ $danhmuc->ten }}</p>
+                                                <p class="card-text" style="text-transform: uppercase;">
+                                                    {{ $danhmuc->ten }}</p>
                                             </div>
                                         </div>
                                     </li>
@@ -166,23 +167,34 @@
                                     <img class="card-img-top img-location"
                                         src="{{ asset('images/sanpham/' . $sanpham->anh) }}" alt="Card image cap">
                                     <div class="card-body">
-                                        <p style="height: 70px" class="card-text"><a href=""><b>
+                                        <p style="height: 70px;text-transform: uppercase;" class="card-text"><a
+                                                href=""><b>
                                                     {{ $sanpham->ten }}
                                                 </b></a>
                                         </p>
-                                        <span style="float: left">
-                                            <b>
-                                                <h5>Giá: {{ $sanpham->gia }}&#8363</h5>
-                                            </b>
-                                            <small>Đã bán: {{ $sanpham->soluongban }} sản phẩm</small>
-                                        </span>
-
-                                        <a href="#">
-                                            <span
-                                                style="float: right; background-color: #ff4367; color: white; padding: 10px 15px">Mua
-                                                Ngay
-                                            </span>
-                                        </a>
+                                        <div class="row">
+                                            <div class="col col-lg-7">
+                                                <span style="float: left">
+                                                    <b>
+                                                        <h5>Giá: {{ $sanpham->gia }}&#8363</h5>
+                                                    </b>
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar"
+                                                            style="width: {{ $sanpham->soluongban }}%; background-color: #453be4"
+                                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                    <small>Đã bán: {{ $sanpham->soluongban }} sản phẩm</small>
+                                                </span>
+                                            </div>
+                                            <div class="col col-lg-5">
+                                                <a href="#">
+                                                    <span
+                                                        style="float: right; background-color: #ff4367; color: white; padding: 10px 15px;">Mua
+                                                        Ngay
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -322,8 +334,8 @@
                 <div class="row">
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: -5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -moz-box-shadow: -5px -5px -5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -webkit-box-shadow: -5px -5px -5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -moz-box-shadow: -5px -5px -5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-box-shadow: -5px -5px -5px #666;">
                         <i class="fas fa-award fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
                         <b class="title">Beginners</b>
                         @if (isset($blog0->deleted_at))
@@ -351,8 +363,8 @@
                     </div>
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -moz-box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -webkit-box-shadow: 5px 5px 5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -moz-box-shadow: 5px 5px 5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-box-shadow: 5px 5px 5px #666;">
                         <i class="fab fa-asymmetrik fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
                         <b class="title">Premium</b>
                         @if (isset($blog2->deleted_at))
@@ -389,7 +401,7 @@
                                     <div class="card-body">
                                         <a href="">
                                             <p class="card-text"
-                                                style="color: #453be4; font-weight: bold;height: 60px;">
+                                                style="color: #453be4; font-weight: bold;height: 60px;text-transform: uppercase;">
                                                 {{ $blog->tieude }}
                                             </p>
                                         </a>

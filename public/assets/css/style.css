@@ -112,12 +112,6 @@ body {
 }
 /* end banner2 */
 /* location */
-.img-location {
-    border-radius: 10px;
-    height: 300px;
-    margin-top: 20px;
-    padding: 30px;
-}
 .img-blog {
     border-radius: 10px;
     height: 330px;
@@ -333,6 +327,13 @@ hr {
         margin-top: -50px;
         width: 150px;
     }
+    .img-location {
+        border-radius: 10px;
+        height: 300px;
+        width: 300px;
+        margin: 0 auto;
+        padding: 30px;
+    }
     /* banner-3 */
     .banner-3 {
         width: 100%;
@@ -513,7 +514,9 @@ hr {
         width: 120px;
     }
     #catelogy {
-        font-size: 30px;
+        height: 130px;
+        width: 130px;
+        margin: 0 auto;
     }
     .catelogy .btn-popu {
         margin-top: 35px;
@@ -620,6 +623,13 @@ hr {
         height: 150px;
     }
     /* end footer */
+    .img-location {
+        border-radius: 10px;
+        height: 200px;
+        width: 200px;
+        margin: 0 auto;
+        padding: 30px;
+    }
 }
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -719,6 +729,13 @@ hr {
     /* end a plan */
     .banner-4 {
         height: 180px;
+    }
+    .img-location {
+        border-radius: 10px;
+        height: 280px;
+        width: 280px;
+        margin: 0 auto;
+        padding: 30px;
     }
 }
 /* Extra large devices (large desktops, 1200px and up) */
@@ -857,5 +874,12 @@ hr {
     .footer-end {
         height: 60px;
         margin-top: 80px;
+    }
+    .img-location {
+        border-radius: 10px;
+        height: 280px;
+        width: 280px;
+        margin: 0 auto;
+        padding: 30px;
     }
 }

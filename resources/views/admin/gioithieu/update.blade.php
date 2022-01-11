@@ -38,6 +38,7 @@
                                 {{ method_field('put') }}
                                 <div class="row">
                                     <div class="col-6">
+                                        <label class="control-label"><b>Tiêu Đề</b></label>
                                         <div class="input-group col-lg-6 mb-4">
                                             <input style="border-radius: 10px;" type="text" name="tieude"
                                                 value="{{ $about->tieude }}"
@@ -45,6 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
+                                        <label class="control-label"><b>Tiêu Chí 1</b></label>
                                         <div class="input-group col-lg-6 mb-4">
                                             <input style="border-radius: 10px;" type="text" name="tieuchi1"
                                                 value="{{ $about->tieuchi1 }}"
@@ -52,12 +54,14 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
+                                        <label class="control-label"><b>Ảnh</b></label>
                                         <div class="input-group col-lg-12 mb-4">
                                             <input style="border-radius: 10px;" type="file" name="anh"
                                                 class="form-control bg-white border-left-0 border-md">
                                         </div>
                                     </div>
                                     <div class="col-6">
+                                        <label class="control-label"><b>Tiêu Chí 2</b></label>
                                         <div class="input-group col-lg-6 mb-4">
                                             <input style="border-radius: 10px;" type="text" name="tieuchi2"
                                                 value="{{ $about->tieuchi2 }}" placeholder="Tiêu Chí 2"
@@ -65,14 +69,14 @@
                                         </div>
                                     </div>
                                     <div class="col-6">
+                                        <label class="control-label"><b>Nội Dung</b></label>
                                         <div class="form-group">
-                                            <textarea name="noidung" id="editor">
-                                                                                        {{ $about->noidung }}
-                                                                                        </textarea>
+                                            <textarea name="noidung" id="editor">{{ $about->noidung }}</textarea>
                                         </div>
 
                                     </div>
                                     <div class="col-6">
+                                        <label class="control-label"><b>Tiêu Chí 3</b></label>
                                         <div class="input-group col-lg-6 mb-4">
                                             <input style="border-radius: 10px;" type="text" name="tieuchi3"
                                                 value="{{ $about->tieuchi3 }}" placeholder="Tiêu Chí 3"

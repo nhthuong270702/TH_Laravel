@@ -98,7 +98,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div style="float: right;" class="phantrang">
+                        <div style="float: left;" class="phantrang">
                             {!! $users->links() !!}
                         </div>
                     </div>

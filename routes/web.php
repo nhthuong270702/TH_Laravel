@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//dang nhap
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', function () {
         return view('index');
@@ -38,6 +37,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin', 
 
     //user
     Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+
+        //doi mat khau
+        Route::get('/doi-mat-khau/{id}', 'UserController@doi_mat_khau_form')->name('doi-mat-khau-form');
+        Route::put('/doi-mat-khau/{id}', 'UserController@doi_mat_khau')->name('doi-mat-khau');
+
+
         Route::get('/', 'UserController@index')->name('index');
         Route::delete('/{id}', 'UserController@destroy')->name('destroy');
         Route::get('/create', 'UserController@create')->name('create');

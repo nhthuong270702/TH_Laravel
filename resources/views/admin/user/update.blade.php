@@ -27,44 +27,39 @@
 
                         <!-- Registeration Form -->
                         <div class="col-md-7 col-lg-6 ml-auto">
+                            <ul class="alert text-danger">
+                                @foreach ($errors->all() as $error)
+                                    <li style="color: red;font-family:monospace">{{ $error }}</li>
+                                @endforeach
+                            </ul>
                             <form action="{{ route('user.update', [$user->id]) }}" method="post">
                                 @csrf
                                 {{ method_field('put') }}
                                 <div class="row">
-                                    <!-- First Name -->
-                                    <div class="input-group col-lg-6 mb-4">
-                                        <input style="border-radius: 10px;" value="{{ $user->name }}" required=""
-                                            type="text" name="name" placeholder="Họ Và Tên"
-                                            class="form-control bg-white border-left-0 border-md">
-                                    </div>
+                                    <label class="control-label"><b>Email</b></label>
                                     <div class="input-group col-lg-12 mb-4">
-                                        <input style="border-radius: 10px;" value="{{ $user->email }}" required=""
-                                            type="email" name="email" placeholder="Email Address"
+                                        <input value="{{ $user->email }}" type="email" name="email"
+                                            class="form-control bg-white border-left-0 border-md" readonly>
+                                    </div>
+                                    <label class="control-label"><b>Tên Người Dùng</b></label>
+                                    <div class="input-group col-lg-6 mb-4">
+                                        <input value="{{ $user->name }}" required="" type="text" name="name"
                                             class="form-control bg-white border-left-0 border-md">
                                     </div>
-
+                                    <label class="control-label"><b>Phân Quyền</b></label>
                                     <div class="input-group col-lg-12 mb-4">
                                         <select name="role" required="" class="form-control browser-default custom-select">
-                                            <!-- <option class="hidden" selected disabled>Role</option> -->
                                             <option value="1" {{ $user->role === '1' ? 'Selected' : '' }}>Admin</option>
                                             <option value="0" {{ $user->role === '0' ? 'Selected' : '' }}>Người Dùng
                                             </option>
                                         </select>
                                     </div>
-
-                                    <!-- Password -->
-                                    <ul class="alert text-danger">
-                                        @foreach ($errors->all() as $error)
-                                            <li style="color: red;font-family:monospace">{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
                                     <!-- Submit Button -->
                                     <div class="row" style="display: block; margin: 0 auto">
-                                        <a class="btn btn-secondary"
-                                            style="float: left; width: 100px; display: block; margin-right: 30px"
-                                            href="{{ route('user.index') }}">Trở
-                                            Lại</a>
-                                        <button class="btn btn-primary" type="submit" style="width: 100px">Update</button>
+                                        <a class="btn btn-outline-info"
+                                            style="float: left; width: 150px; display: block; margin-right: 30px"
+                                            href="{{ route('user.doi-mat-khau-form', $user->id) }}">Đổi Mật Khẩu</a>
+                                        <button class="btn btn-primary" type="submit" style="width: 100px">Xong</button>
                                     </div>
                                     <!-- Already Registered -->
                                 </div>

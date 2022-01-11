@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        $gioithieu = DB::table('gioi_thieu')->orderBy('id', 'DESC')->first();
+        $gioithieu = DB::table('gioi_thieu')->orderBy('id', 'asc')->first();
         view()->share('gioithieu', $gioithieu);
 
         //danh muc

@@ -13,7 +13,7 @@ class DanhMucController extends Controller
 
     public function index()
     {
-        $danhmucs = DanhMuc::sortable()->paginate(10);
+        $danhmucs = DanhMuc::sortable()->simplePaginate(5);
         return view('admin.danhmuc.list', compact('danhmucs'));
     }
 

@@ -13,7 +13,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        $blogs = Blog::sortable()->paginate(10);
+        $blogs = Blog::sortable()->simplePaginate(5);
         return view('admin.blog.list', compact('blogs'));
     }
 

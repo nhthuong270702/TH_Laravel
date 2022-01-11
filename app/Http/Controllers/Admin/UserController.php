@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\DoiMatKhauRequest;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -20,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::simplePaginate(5);
         return view('admin.user.list', compact('users'));
     }
     /**
@@ -84,20 +85,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $request->validate(
-            [
-                'email' => 'unique:users,email,' . $user->id,
-            ],
-            [
-                'email.unique' => 'Email đã tồn tại',
-            ]
-        );
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->save();
+        $user = User::find($id);
+        $data = $request->all();
+        $user->update($data);
         return redirect()->route('user.index')->with('thongbao', 'Cập Nhật Thành Công');
     }
 
@@ -127,9 +119,9 @@ class UserController extends Controller
                             <td>' . $al->email . '</td>
                             <td>' . $al->role . '</td>
                             <td><a href="#"><button class="btn btn-primary"><i class="fas fa-eye"></i></button></a></td>
-                            <td><a href="/admin/user/edit' . $al->id . '/edit"><button class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a></td>
+                            <td><a href="/admin/user/edit/' . $al->id . '"><button class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a></td>
                             <td>
-                                    <form action="/admin/user/delete' . $al->id . '" method="post">
+                                    <form action="/admin/user/delete/' . $al->id . '" method="post">
                                     ' . csrf_field() . '
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button type="submit" class="btn btn-xs btn-danger btn-flat show_confirm" data-toggle="tooltip" title="Delete"><i class="fa fa-trash"></i></button>
@@ -140,33 +132,17 @@ class UserController extends Controller
         }
         return Response($output);
     }
-    public function cap_nhat_thong_tin($id)
-    {
-        $user = User::find($id);
-        return view('user.qltaikhoan', compact('user'));
-    }
-    public function cap_nhat(Request $request, $id)
-    {
-        $user = User::find($id);
-        $data = $request->validate(
-            [
-                'name' => 'required',
-            ],
-        );
-        $user->update($data);
-        return back()->with('tb', 'Cập Nhật Thành Công');
-    }
 
-    public function doi_mat_khau_thong_tin($id)
+    public function doi_mat_khau_form($id)
     {
         $user = User::find($id);
-        return view('user.doimatkhau', compact('user'));
+        return view('admin.user.password', compact('user'));
     }
-    public function doi_mat_khau(Request $request, $id)
+    public function doi_mat_khau(DoiMatKhauRequest $request, $id)
     {
         $request->validated();
 
-        $user = Auth::user();
+        $user = User::find($id);
 
         if (!Hash::check($request->password, $user->password)) {
 

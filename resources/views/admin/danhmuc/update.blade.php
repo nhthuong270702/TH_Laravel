@@ -36,14 +36,16 @@
                                 {{ method_field('put') }}
                                 <div class="row">
                                     <div class="col-6">
-                                        <div class="input-group col-lg-6 mb-4">
+                                        <label class="control-label"><b>Thuộc loại</b></label>
+                                        <div class="input-group mb-4 mt-2">
                                             <input style="border-radius: 10px;" type="text" name="ten"
                                                 value="{{ $danhmuc->ten }}"
                                                 class="form-control bg-white border-left-0 border-md">
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <div class="input-group col-lg-12 mb-4">
+                                        <label class="control-label"><b>Ảnh</b></label>
+                                        <div class="input-group mb-4 mt-2">
                                             <input style="border-radius: 10px;" type="file" name="anh"
                                                 class="form-control bg-white border-left-0 border-md">
                                         </div>
