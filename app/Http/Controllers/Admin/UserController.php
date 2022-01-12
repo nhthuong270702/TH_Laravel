@@ -108,8 +108,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $output = '';
-            $users = User::where('name', 'like', '%' . $request->search . '%')
-                ->orwhere('email', 'like', '%' . $request->search . '%')->get();
+            $users = User::where('name', 'like', '%' . $request->search . '%')->get();
             $i = 1;
             foreach ($users as $al) {
                 $output .= '<tr>
@@ -117,7 +116,7 @@ class UserController extends Controller
                             <td>' . $i++ . '</td>
                             <td>' . $al->name . '</td>
                             <td>' . $al->email . '</td>
-                            <td>' . $al->role . '</td>
+                            <td>' . ($al->role == "1" ? "Người Quản Trị" :  "Người Dùng") . '</td>
                             <td><a href="#"><button class="btn btn-primary"><i class="fas fa-eye"></i></button></a></td>
                             <td><a href="/admin/user/edit/' . $al->id . '"><button class="btn btn-primary"><i class="fas fa-user-edit"></i></button></a></td>
                             <td>

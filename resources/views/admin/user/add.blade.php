@@ -8,16 +8,6 @@
         <main style="padding: 25px;background-color: rgb(237, 241, 245);">
             <div style="background-color:rgb(255, 255, 255);" class="container-fluid px-4 ">
                 <h1 style="padding-top: 20px;" class="text-center"><i class="fas fa-tasks"></i> Thêm Người Dùng</h1>
-                <header class="header">
-                    <nav class="navbar navbar-expand-lg navbar-light py-3">
-                        <div class="container">
-                            <!-- Navbar Brand -->
-                            <a href="#" class="navbar-brand">
-                            </a>
-                        </div>
-                    </nav>
-                </header>
-
                 <div class="container">
                     <div class="row py-5 align-items-center">
                         <!-- For Demo Purpose -->

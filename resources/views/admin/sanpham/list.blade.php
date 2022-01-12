@@ -12,8 +12,8 @@
     </style>
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h1 style="margin-top: 30px 0px; text-align: center">Quản Lí Sản Phẩm</h1>
-            <div class="card-header mt-5 mb-3">
+            <h1 style="text-align: center">Quản Lí Sản Phẩm</h1>
+            <div class="card-header">
                 <div class="add">
                     <div class="row">
                         <div class="col-9">

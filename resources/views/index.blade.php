@@ -37,7 +37,10 @@
                                 <select class="custom-select" id="inputGroupSelect01" style="border-left: none;">
                                     <option selected>Catelogy...</option>
                                     @foreach ($danhmuc5 as $danhmuc)
-                                        <option value="{{ $danhmuc->id }}">{{ $danhmuc->ten }}</option>
+                                        @if (isset($danhmuc->deleted_at))
+                                        @else
+                                            <option value="{{ $danhmuc->id }}">{{ $danhmuc->ten }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -65,7 +68,10 @@
                             <ul class="keywords">
                                 <li><b>Trendings Keywords:</b> </li>
                                 @foreach ($danhmucs as $danhmuc)
-                                    <li><a href="">{{ $danhmuc->ten }}</a></li>
+                                    @if (isset($danhmuc->deleted_at))
+                                    @else
+                                        <li><a href="">{{ $danhmuc->ten }}</a></li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
@@ -88,11 +94,12 @@
                             Catelogies</button>
                     </div>
                 </div>
-                @if (isset($danhmucs))
-                    <div class="row">
-                        <div class="col-12">
-                            <ul class="list text-center">
-                                @foreach ($danhmucs as $danhmuc)
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="list text-center">
+                            @foreach ($danhmucs as $danhmuc)
+                                @if (isset($danhmuc->deleted_at))
+                                @else
                                     <li data-aos="flip-down">
                                         <div class="card">
                                             <img id="catelogy" src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}"
@@ -103,11 +110,11 @@
                                             </div>
                                         </div>
                                     </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                                @endif
+                            @endforeach
+                        </ul>
                     </div>
-                @endif
+                </div>
             </div>
         </section>
         <!-- end catelogy -->
@@ -158,7 +165,8 @@
                 </div>
                 <div class="row mt-4 location">
                     @foreach ($sanpham3 as $sanpham)
-                        @if (isset($sanpham))
+                        @if (isset($sanpham->deleted_at))
+                        @else
                             <div class="col-md-4" data-aos="flip-left">
                                 <div class="card card-location">
                                     <div class="sale">
@@ -252,7 +260,8 @@
                 </div>
                 <div class="row mt-4">
                     @foreach ($sanphams as $sanpham)
-                        @if (isset($sanpham))
+                        @if (isset($sanpham->deleted_at))
+                        @else
                             @if ($sanpham->danhmuc)
                                 <div class="col-md-3" data-aos="flip-left">
                                     <div class="card" style="width: 100%; margin-top: 10px">
@@ -334,8 +343,8 @@
                 <div class="row">
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: -5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -moz-box-shadow: -5px -5px -5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-box-shadow: -5px -5px -5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            -moz-box-shadow: -5px -5px -5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            -webkit-box-shadow: -5px -5px -5px #666;">
                         <i class="fas fa-award fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
                         <b class="title">Beginners</b>
                         @if (isset($blog0->deleted_at))
@@ -363,8 +372,8 @@
                     </div>
                     <div class="col-md-4 around text-center" data-aos="flip-right"
                         style="box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -moz-box-shadow: 5px 5px 5px #666;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -webkit-box-shadow: 5px 5px 5px #666;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            -moz-box-shadow: 5px 5px 5px #666;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            -webkit-box-shadow: 5px 5px 5px #666;">
                         <i class="fab fa-asymmetrik fa-4x icon" style="margin-top: 30px; color: #453be4;"></i> <br>
                         <b class="title">Premium</b>
                         @if (isset($blog2->deleted_at))

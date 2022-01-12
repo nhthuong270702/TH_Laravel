@@ -6,17 +6,7 @@
     <div id="layoutSidenav_content">
         <main style="padding: 25px;background-color: rgb(237, 241, 245);">
             <div style="background-color:rgb(255, 255, 255);" class="container-fluid px-4 ">
-                <h1 style="padding-top: 20px;" class="text-center"><i class="fas fa-tasks"></i> Thêm Sản Phẩm</h1>
-                <!-- Navbar-->
-                <header class="header">
-                    <nav class="navbar navbar-expand-lg navbar-light py-3">
-                        <div class="container">
-                            <!-- Navbar Brand -->
-                            <a href="#" class="navbar-brand">
-                            </a>
-                        </div>
-                    </nav>
-                </header>
+                <h1 style="padding-top: 20px;" class="text-center">Thêm Sản Phẩm</h1>
                 <div class="container">
                     <div class="row">
                         @if (session('errors'))

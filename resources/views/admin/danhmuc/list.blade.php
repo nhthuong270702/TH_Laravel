@@ -12,8 +12,8 @@
     </style>
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h1 style="margin-top: 30px; text-align: center">Quản Lí Danh Mục Sản Phẩm</h1>
-            <div class="card-header row mb-3 mt-5">
+            <h1 style="text-align: center">Quản Lí Danh Mục Sản Phẩm</h1>
+            <div class="card-header row">
                 <div class="col-9">
                     <div class="add">
                         <a style="float: left; margin-right: 10px" href="{{ route('danhmuc.create') }}"><button

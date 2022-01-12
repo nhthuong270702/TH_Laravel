@@ -9,16 +9,6 @@
                 <h1 style="padding-top: 20px;" class="text-center"><i class="fas fa-tasks"></i> Cập Nhật Thông Tin Giới
                     Thiệu
                 </h1>
-                <!-- Navbar-->
-                <header class="header">
-                    <nav class="navbar navbar-expand-lg navbar-light py-3">
-                        <div class="container">
-                            <!-- Navbar Brand -->
-                            <a href="#" class="navbar-brand">
-                            </a>
-                        </div>
-                    </nav>
-                </header>
                 <div class="container">
                     <div class="row">
                         @if (session('errors'))

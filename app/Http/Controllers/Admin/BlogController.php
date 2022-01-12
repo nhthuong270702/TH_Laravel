@@ -128,7 +128,7 @@ class BlogController extends Controller
                             <td style="text-align: center">' . $al->sobinhluan . '</td>
                            <td style="text-align: center"><img src="../images/blogs/' .  $al->anh  . '"
                                         style="width:150px; height: 120px;" alt=""></td>
-                            <td><a href="/admin/blog/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
+                            <td><a href="#"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
                             <td><a href="/admin/blog/edit/' . $al->id . '"><button class="btn btn-warning"><i
                                             class="far fa-edit"></i></button></a></td>
                             <td>

@@ -13,8 +13,7 @@
     <div id="layoutSidenav_content">
         <main style="padding: 25px;">
             <div style="background-color:rgb(255, 255, 255);" class="container-fluid px-4 ">
-                <h1 style="padding: 20px 0px;" class="text-center"><i class="fas fa-tasks"></i> Quản Lí Người Dùng</h1>
-
+                <h1 class="text-center"><i class="fas fa-tasks"></i> Quản Lí Người Dùng</h1>
                 <div class="card mb-4">
                     <div class="card-header">
                         <div class="row">
@@ -53,12 +52,12 @@
                     <div style="overflow-x:auto;">
                         <table class="table table-striped table-bordered text-center" style="background-color: white">
                             <thead>
-                                <tr>
+                                <tr class="bg-grey">
                                     <th><input type="checkbox" id="check_all"></th>
                                     <th>STT</th>
                                     <th style="text-decoration: none">@sortablelink('name', 'Tên')</th>
                                     <th>@sortablelink('email', 'Email')</th>
-                                    <th>Role</th>
+                                    <th>Vai Trò</th>
                                     <th colspan="3">Hoạt Động</th>
                                 </tr>
                             </thead>
@@ -78,7 +77,7 @@
                                         @elseif($al->role == 0)
                                             <td>Người dùng</td>
                                         @endif
-                                        <td><a href=""><button class="btn btn-outline-info"><i
+                                        <td><a href="#"><button class="btn btn-outline-info"><i
                                                         class="fas fa-eye"></i></button></a></td>
                                         <td><a href="{{ route('user.edit', [$al->id]) }}"><button
                                                     class="btn btn-outline-warning"><i

@@ -8,15 +8,6 @@
         <main style="padding: 25px;background-color: rgb(237, 241, 245);">
             <div style="background-color:rgb(255, 255, 255);" class="container-fluid px-4 ">
                 <h1 style="padding-top: 20px;" class="text-center"><i class="fas fa-tasks"></i> Cập Nhật Người Dùng</h1>
-                <header class="header">
-                    <nav class="navbar navbar-expand-lg navbar-light py-3">
-                        <div class="container">
-                            <!-- Navbar Brand -->
-                            <a href="#" class="navbar-brand">
-                            </a>
-                        </div>
-                    </nav>
-                </header>
                 <div class="container">
                     <div class="row py-5 mt-4 align-items-center">
                         <!-- For Demo Purpose -->
@@ -24,7 +15,6 @@
                             <img src="https://lifeveda.com.my/wp-content/themes/lifeveda-theme/static/img/edit-user.png"
                                 width="300px" alt="" class="img-fluid mb-3 d-none d-md-block">
                         </div>
-
                         <!-- Registeration Form -->
                         <div class="col-md-7 col-lg-6 ml-auto">
                             <ul class="alert text-danger">

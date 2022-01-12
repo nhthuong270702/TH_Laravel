@@ -5,8 +5,8 @@
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h1 style="margin-top: 30px; text-align: center">Quản Lí Thông Tin Giới Thiệu</h1>
-            <div class="card-header row mb-3">
+            <h1 style="text-align: center">Quản Lí Thông Tin Giới Thiệu</h1>
+            <div class="card-header row">
                 <div class="add" style="display: flex; justify-content: center;">
                     <a style="float: left; padding-left: 10px;" href="{{ route('gioithieu.create') }}"><button
                             class="btn btn-primary"><i class="fas fa-plus"></i></button></a>

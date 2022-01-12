@@ -30,14 +30,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        $gioithieu = DB::table('gioi_thieu')->orderBy('id', 'asc')->first();
+        $gioithieu = DB::table('gioi_thieu')->orderBy('id', 'desc')->first();
         view()->share('gioithieu', $gioithieu);
 
         //danh muc
-        $danhmucs = DB::table('danh_muc')->orderBy('id', 'desc')->take(10)->get();
+        $danhmucs = DB::table('danh_muc')->orderBy('id', 'asc')->take(10)->get();
         view()->share('danhmucs', $danhmucs);
 
-        $danhmuc5 = DB::table('danh_muc')->orderBy('id', 'desc')->take(5)->get();
+        $danhmuc5 = DB::table('danh_muc')->orderBy('id', 'asc')->take(5)->get();
         view()->share('danhmuc5', $danhmuc5);
 
         //blog
@@ -54,7 +54,7 @@ class AppServiceProvider extends ServiceProvider
         view()->share('blog6', $blog6);
 
         //sanpham
-        $sanphams = SanPham::with('danhmuc')->take(8)->get();
+        $sanphams = SanPham::with('danhmuc')->orderBy('id', 'desc')->take(8)->get();
         view()->share('sanphams', $sanphams);
 
         $sanpham3 = DB::table('san_pham')->orderBy('gia', 'desc')->take(3)->get();

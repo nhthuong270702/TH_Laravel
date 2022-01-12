@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h2 style="margin-top: 30px; text-align: center">Quản Lí Blog Đã Xóa</h2>
+            <h2 style="text-align: center">Quản Lí Blog Đã Xóa</h2>
             <div class="row mb-3">
             </div>
             @if ($blogs_trash->isEmpty())

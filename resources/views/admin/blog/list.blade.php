@@ -12,8 +12,8 @@
     </style>
     <div class="container-fluid" id="layoutSidenav_content">
         <main style="padding: 25px;width: 100%">
-            <h1 style="margin-top: 10px; text-align: center">Quản Lí Blog</h1>
-            <div class="card-header mt-5 mb-3">
+            <h1 style="text-align: center">Quản Lí Blog</h1>
+            <div class="card-header">
                 <div class="add">
                     <div class="row">
                         <div class="col-9">
@@ -77,8 +77,7 @@
                                 <td style="text-align: center"><img src="{{ asset('images/blogs/' . $blog->anh) }}"
                                         style="width:150px; height: 120px;" alt=""></td>
                                 <td>
-                                    <a class="btn btn-outline-info" href="{{ route('blog.show', $blog->id) }}"><i
-                                            class="far fa-eye"></i></a>
+                                    <a class="btn btn-outline-info" href="#"><i class="far fa-eye"></i></a>
                                 </td>
                                 <td>
                                     <a class="btn btn-outline-warning" href="{{ route('blog.edit', $blog->id) }}"><i

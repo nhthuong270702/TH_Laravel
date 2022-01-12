@@ -121,14 +121,14 @@ class DanhMucController extends Controller
             $i = 1;
             foreach ($danhmucs as $al) {
                 $output .= '<tr id="tr_{{ $al->id }}">
-                                <td><input type="checkbox" class="checkbox" data-id="{{ $al->id }}">
+                                <td><input type="checkbox" class="checkbox" data-id="{{ ' . $al->id . ' }}">
                             <td>' . $i++ . '</td>
                             <td>' . $al->ten . '</td>
                              <td><img src="../images/danhmuc/' .  $al->anh  . '"
                                         style="width:125px; height: 120px;" alt=""></td>
                                         
                             <td><a href="/admin/danhmuc/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
-                            <td><a href="/admin/danhmuc/edit' . $al->id . '"><button class="btn btn-warning"><i
+                            <td><a href="/admin/danhmuc/edit/' . $al->id . '"><button class="btn btn-warning"><i
                                             class="far fa-edit"></i></button></a></td>
                             <td>
                                     <form action="/admin/danhmuc/delete/' . $al->id . '" method="post">
