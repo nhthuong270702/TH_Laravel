@@ -30,7 +30,7 @@ class BlogController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/blogs', $new_image);
+            $get_image->move('blogs_anh', $new_image);
             $data['anh'] = $new_image;
             $added = BLog::create($data);
             if ($added) {
@@ -62,7 +62,7 @@ class BlogController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/blogs', $new_image);
+            $get_image->move('blogs_anh', $new_image);
             $data['anh'] = $new_image;
             $blog->update($data);
             return redirect()->route('blog.index')->with('thongbao', 'Cập Nhật Thành Công');
@@ -126,7 +126,7 @@ class BlogController extends Controller
                             <td>' . $al->noidung . '</td>
                             <td style="text-align: center">' . $al->ngaydang . '</td>
                             <td style="text-align: center">' . $al->sobinhluan . '</td>
-                           <td style="text-align: center"><img src="../images/blogs/' .  $al->anh  . '"
+                           <td style="text-align: center"><img src="/blogs_anh/' .  $al->anh  . '"
                                         style="width:150px; height: 120px;" alt=""></td>
                             <td><a href="#"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
                             <td><a href="/admin/blog/edit/' . $al->id . '"><button class="btn btn-warning"><i

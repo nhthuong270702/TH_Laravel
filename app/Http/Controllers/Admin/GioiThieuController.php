@@ -30,7 +30,7 @@ class GioiThieuController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/abouts', $new_image);
+            $get_image->move('abouts_anh', $new_image);
             $data['anh'] = $new_image;
             $added = GioiThieu::create($data);
             if ($added) {
@@ -62,7 +62,7 @@ class GioiThieuController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/abouts', $new_image);
+            $get_image->move('abouts_anh', $new_image);
             $data['anh'] = $new_image;
             $about->update($data);
             return redirect()->route('gioithieu.index')->with('thongbao', "Cập Nhật Thành Công");

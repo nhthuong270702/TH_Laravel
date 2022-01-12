@@ -74,7 +74,7 @@
                                 </td>
                                 <td style="text-align: center">{{ $blog->ngaydang }}</td>
                                 <td style="text-align: center">{{ $blog->sobinhluan }}</td>
-                                <td style="text-align: center"><img src="{{ asset('images/blogs/' . $blog->anh) }}"
+                                <td style="text-align: center"><img src="{{ asset('blogs_anh/' . $blog->anh) }}"
                                         style="width:150px; height: 120px;" alt=""></td>
                                 <td>
                                     <a class="btn btn-outline-info" href="#"><i class="far fa-eye"></i></a>

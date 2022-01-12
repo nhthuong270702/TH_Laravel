@@ -66,7 +66,7 @@
                                     <td><input type="checkbox" class="checkbox" data-id="{{ $danhmuc->id }}">
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $danhmuc->ten }}</td>
-                                    <td><img src="{{ asset('images/danhmuc/' . $danhmuc->anh) }}"
+                                    <td><img src="{{ asset('danhmuc_anh/' . $danhmuc->anh) }}"
                                             style="width:125px; height: 120px;" alt=""></td>
                                     <td>{{ $danhmuc->sanphams->count() }}</td>
                                     <td>

@@ -65,7 +65,7 @@
                                     </td>
                                     <td style="text-align: center">{{ $blog->ngaydang }}</td>
                                     <td style="text-align: center">{{ $blog->sobinhluan }}</td>
-                                    <td><img src="{{ asset('images/blogs/' . $blog->anh) }}"
+                                    <td><img src="{{ asset('blogs_anh/' . $blog->anh) }}"
                                             style="width:90px; height: 80px;" alt=""></td>
                                     <td>
                                         <a class="btn btn-success" href="{{ route('blog.unTrash', $blog->id) }}"><i

@@ -39,7 +39,7 @@
                                 <td>{{ $sanpham->gia }}</td>
                                 <td>{{ $sanpham->soluongban }}</td>
                                 <td>{{ $sanpham->ngaydang }}</td>
-                                <td><img src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
+                                <td><img src="{{ asset('sanpham_anh/' . $sanpham->anh) }}"
                                         style="width:90px; height: 80px;" alt=""></td>
                                 <td>
                                     <a class="btn btn-info" href="{{ route('sanpham.show', $sanpham->id) }}"><i

@@ -82,8 +82,7 @@
                                     <td style="text-align: center">{{ $sanpham->gia }}</td>
                                     <td style="text-align: center">{{ $sanpham->soluongban }}</td>
                                     <td>{{ $sanpham->ngaydang }}</td>
-                                    <td style="text-align: center"><img
-                                            src="{{ asset('images/sanpham/' . $sanpham->anh) }}"
+                                    <td style="text-align: center"><img src="{{ asset('sanpham_anh/' . $sanpham->anh) }}"
                                             style="width:110px; height: 95px;" alt=""></td>
                                     <td>
                                         <a class="btn btn-outline-info"

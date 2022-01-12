@@ -32,7 +32,7 @@ class SanPhamController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/sanpham', $new_image);
+            $get_image->move('sanpham_anh', $new_image);
             $data['anh'] = $new_image;
             $added = SanPham::create($data);
             if ($added) {
@@ -72,7 +72,7 @@ class SanPhamController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/sanpham', $new_image);
+            $get_image->move('sanpham_anh', $new_image);
             $data['anh'] = $new_image;
             $sanpham->update($data);
             return redirect()->route('sanpham.index')->with('thongbao', "Cập Nhật Thành Công");
@@ -138,7 +138,7 @@ class SanPhamController extends Controller
                             <td>' . $al->gia . '</td>
                             <td>' . $al->soluongban . '</td>
                             <td>' . $al->ngaydang . '</td>
-                            <td><img src="../images/sanpham/' .  $al->anh  . '"
+                            <td><img src="/sanpham_anh/' .  $al->anh  . '"
                                         style="width:110px; height: 95px;" alt=""></td>
                                 <td>
                             <td><a href="/admin/sanpham/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>

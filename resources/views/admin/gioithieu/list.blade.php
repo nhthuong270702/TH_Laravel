@@ -45,7 +45,7 @@
                                 </td>
                                 <td>{{ $about->tieude }}</td>
                                 <td>{!! html_entity_decode($about->noidung) !!}</td>
-                                <td><img src="{{ asset('images/abouts/' . $about->anh) }}"
+                                <td><img src="{{ asset('abouts_anh/' . $about->anh) }}"
                                         style="width:200px; height: 180px;" alt=""></td>
                                 <td>{{ $about->tieuchi1 }}</td>
                                 <td>{{ $about->tieuchi2 }}</td>

@@ -30,7 +30,7 @@ class DanhMucController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/danhmuc', $new_image);
+            $get_image->move('danhmuc_anh', $new_image);
             $data['anh'] = $new_image;
             $added = DanhMuc::create($data);
             if ($added) {
@@ -63,7 +63,7 @@ class DanhMucController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('images/danhmuc', $new_image);
+            $get_image->move('danhmuc_anh', $new_image);
             $data['anh'] = $new_image;
             $danhmuc->update($data);
             return redirect()->route('danhmuc.index')->with('thongbao', "Cập Nhật Thành Công");
@@ -124,7 +124,7 @@ class DanhMucController extends Controller
                                 <td><input type="checkbox" class="checkbox" data-id="{{ ' . $al->id . ' }}">
                             <td>' . $i++ . '</td>
                             <td>' . $al->ten . '</td>
-                             <td><img src="../images/danhmuc/' .  $al->anh  . '"
+                             <td><img src="/danhmuc_anh/' .  $al->anh  . '"
                                         style="width:125px; height: 120px;" alt=""></td>
                                         
                             <td><a href="/admin/danhmuc/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
