@@ -126,7 +126,7 @@ class DanhMucController extends Controller
                             <td>' . $al->ten . '</td>
                              <td><img src="/danhmuc_anh/' .  $al->anh  . '"
                                         style="width:125px; height: 120px;" alt=""></td>
-                                        
+                             <td>' . $al->sanphams->count() . '</td>    
                             <td><a href="/admin/danhmuc/show/' . $al->id . '"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a></td>
                             <td><a href="/admin/danhmuc/edit/' . $al->id . '"><button class="btn btn-warning"><i
                                             class="far fa-edit"></i></button></a></td>
