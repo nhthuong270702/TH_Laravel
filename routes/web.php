@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', function () {
@@ -27,7 +32,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('dangky', 'AuthController@register')->name('register');
     Route::get('dangxuat', 'AuthController@logout')->name('logout');
 });
-
 
 
 // Admin

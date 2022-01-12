@@ -74,8 +74,8 @@
                                         <label class="control-label"><b>Mô Tả</b></label>
                                         <div class="form-group">
                                             <textarea name="mota" id="editor">
-                                                                                                                                                {{ $sanpham->mota }}
-                                                                                                                                            </textarea>
+                                                                                                                                                                                                    {{ $sanpham->mota }}
+                                                                                                                                                                                                </textarea>
                                         </div>
                                     </div>
                                     <div class="col-12 mt-4" style="display: flex; justify-content: center;">
